@@ -1,4 +1,7 @@
 spring:
+  data:
+    rest:
+      base-path: /api/v1
   datasource:
     url: jdbc:mysql://localhost:3306/db_project?createDatabaseIfNotExist=true&serverTimezone=UTC
     username: root
@@ -11,4 +14,4 @@ spring:
         format_sql: true
     show-sql: true
 server:
-  port: 9000
+  port: 9090

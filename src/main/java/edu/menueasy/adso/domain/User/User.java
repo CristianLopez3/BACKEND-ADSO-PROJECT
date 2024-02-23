@@ -11,7 +11,6 @@ import java.math.BigInteger;
 @AllArgsConstructor
 @Getter
 @Setter
-@Builder
 public class User {
 
   @Id

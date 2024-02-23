@@ -1,0 +1,12 @@
+POST http://localhost:9000/users
+Content-Type: application/json
+
+{
+  "name": "Daniel",
+  "lastName": "Torres",
+  "identification": "321234",
+  "cellphone": 3231324,
+  "email": "daniel@mail.com",
+  "password": "************",
+  "role": "ADMIN"
+}
