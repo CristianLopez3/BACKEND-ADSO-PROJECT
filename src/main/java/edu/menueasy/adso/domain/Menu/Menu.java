@@ -9,7 +9,11 @@ import jakarta.persistence.GenerationType;
 @Entity
 @Table(name = "tb_menu")
 public class Menu {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
+
+
+
 }

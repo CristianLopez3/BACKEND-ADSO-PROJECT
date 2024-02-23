@@ -1,9 +1,11 @@
 spring:
+  data:
+    rest:
+      base-path: /api/v1
   datasource:
-    url: jdbc:mysql://localhost:3306/db_user?createDatabaseIfNotExist=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/db_project?createDatabaseIfNotExist=true&serverTimezone=UTC
     username: root
-    password:
-
+    password: Crst#105243
   jpa:
     hibernate:
       ddl-auto: update
@@ -11,11 +13,5 @@ spring:
       hibernate:
         format_sql: true
     show-sql: true
-
-
-      #data:
-      #rest:
-    #basePath: /api/v1
-
 server:
   port: 9090
