@@ -10,7 +10,7 @@ public record UserDto(
         @NotNull @Email String email,
         @NotNull String identification,
         @NotNull String password,
-        @NotNull BigInteger cellphone,
+        @NotNull Long cellphone,
         @NotNull Role role
 ) {
 

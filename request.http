@@ -1,12 +1,18 @@
+GET http://localhost:9000/users
+
+
+
 POST http://localhost:9000/users
 Content-Type: application/json
 
 {
-  "name": "Daniel",
-  "lastName": "Torres",
-  "identification": "321234",
-  "cellphone": 3231324,
-  "email": "daniel@mail.com",
+  "name": "Dani",
+  "lastName": "Pe",
+  "identification": "12342322",
+  "cellphone": 34211,
+  "email": "Fernao@mail.com",
   "password": "************",
   "role": "ADMIN"
 }
+
+

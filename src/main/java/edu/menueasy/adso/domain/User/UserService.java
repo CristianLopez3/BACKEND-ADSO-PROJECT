@@ -6,7 +6,7 @@ public interface UserService {
 
 	public List<UserDto> getUsers();
 	
-	public UserDto getUserById();
+	public UserDto getUserById(Integer id);
 	
 	public void createUser(UserDto userDto);
 	

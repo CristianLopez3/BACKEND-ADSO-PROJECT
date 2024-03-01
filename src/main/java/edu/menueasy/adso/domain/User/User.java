@@ -1,7 +1,10 @@
 package edu.menueasy.adso.domain.User;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 import java.math.BigInteger;
 
@@ -27,7 +30,7 @@ public class User {
   private String identification;
 
   @Column(name = "cellphone", nullable = false, unique = true)
-  private BigInteger cellphone;
+  private Long cellphone;
 
   @Column(name = "email", nullable = false, unique = true)
   private String email;

@@ -3,29 +3,29 @@ package edu.menueasy.adso.domain.User;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class UserServiceImp implements UserService  {
-	
+public class UserServiceImp implements UserService {
+
 	private UserRepository userRepository;
 
 	@Override
 	public List<UserDto> getUsers() {
 		return userRepository.findAll()
-	            .stream()
-	            .map(user -> new UserDto(user))
-	            .collect(Collectors.toList());
+				.stream()
+				.map(user -> new UserDto(user))
+				.collect(Collectors.toList());
 	}
 
 	@Override
-	public UserDto getUserById() {
-		// TODO Auto-generated method stub
-		return null;
+	public UserDto getUserById(Integer id) {
+		User user = userRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("User not found with ID: " + id));
+		return new UserDto(user);
 	}
 
 	@Override
@@ -39,21 +39,31 @@ public class UserServiceImp implements UserService  {
 		user.setRole(userDto.role());
 		user.setIdentification(userDto.identification());
 		userRepository.save(user);
-		
+
 	}
 
 	@Override
 	public void updateUser(UserDto userDto, Integer id) {
-		// TODO Auto-generated method stub
-		
+		User user = userRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("User not found with ID: " + id));
+		user.setName(userDto.name());
+		user.setLastName(userDto.lastName());
+		user.setEmail(userDto.email());
+		user.setPassword(userDto.password());
+		user.setIdentification(userDto.identification());
+		user.setCellphone(userDto.cellphone());
+		user.setRole(userDto.role());
+		user.setId(id);
+		userRepository.save(user);
 	}
 
 	@Override
 	public void deleteUser(Integer id) {
-		// TODO Auto-generated method stub
-		
+		if (userRepository.existsById(id)) {
+			userRepository.deleteById(id);
+		} else {
+			throw new RuntimeException("User not found with ID: " + id);
+		}
 	}
 
-	
-	
 }
