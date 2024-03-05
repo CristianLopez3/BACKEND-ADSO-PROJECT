@@ -33,11 +33,12 @@ public class MenuServiceImpl implements IMenuService {
 	}
 
 	@Override
-	public MenuDto createMenu(MenuDto menuDto) {
+	public MenuDto create(MenuDto menuDto) {
 		Menu menu = new Menu();
 		menu.setTitle(menuDto.title());
 		menu.setDescription(menuDto.description());
 		menu.setPrice(menuDto.price());
+		menu.setState(menuDto.state());
 		try {
 			menuRepository.save(menu);
 			return menuDto;
@@ -47,12 +48,13 @@ public class MenuServiceImpl implements IMenuService {
 	}
 
 	@Override
-	public String updateMenu(MenuDto menuDto, Integer id) {
+	public MenuDto updateMenu(MenuDto menuDto, Integer id) {
 		Menu menu = menuRepository.findById(id).orElseThrow(() -> new RuntimeException("Can't find menu with id: "+id));
 		menu.setTitle(menuDto.title());
 		menu.setDescription(menuDto.description());
 		menu.setPrice(menuDto.price());
-		return "Menu updated with success!";
+		menuRepository.save(menu);
+		return new MenuDto(menu);
 	}
 
 	@Override

@@ -4,15 +4,19 @@ public record MenuDto (
 		Integer id,
 		String title, 
 		String description,
-		Double price
+		Double price,
+		Boolean state
 	){
 	
 	public MenuDto(Menu menu) {
 		this(
-				menu.getId(), 
+				menu.getId(),
 				menu.getTitle(), 
 				menu.getDescription(), 
-				menu.getPrice());
+				menu.getPrice(),
+				menu.getState()
+		);
+
 	}
 
 }

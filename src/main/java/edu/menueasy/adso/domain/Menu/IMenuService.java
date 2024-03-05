@@ -8,9 +8,9 @@ public interface IMenuService {
 	
 	public List<MenuDto> getAll();
 	
-	public MenuDto createMenu(MenuDto menuDto);
+	public MenuDto create(MenuDto menuDto);
 	
-	public String updateMenu(MenuDto menuDto, Integer id);
+	public MenuDto updateMenu(MenuDto menuDto, Integer id);
 	
 	public void deleteMenu(Integer id);
 	
