@@ -4,13 +4,13 @@ import java.util.List;
 
 public interface IMenuService {
 
-	public MenuDto getMenu(Integer id);
+	public ListMenuDto getMenu(Integer id);
 	
-	public List<MenuDto> getAll();
+	public List<ListMenuDto> getAll();
 	
-	public MenuDto create(MenuDto menuDto);
+	public ListMenuDto create(CreateMenuDto menuDto);
 	
-	public MenuDto updateMenu(MenuDto menuDto, Integer id);
+	public ListMenuDto updateMenu(CreateMenuDto menuDto, Integer id);
 	
 	public void deleteMenu(Integer id);
 	

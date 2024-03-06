@@ -1,15 +1,11 @@
 package edu.menueasy.adso.domain.Menu;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import edu.menueasy.adso.domain.category.Category;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 
 @Entity
 @Table(name = "tb_menu")
@@ -30,6 +26,9 @@ public class Menu {
   private Double price;
   @Column(name = "state", nullable = false)
   private Boolean state;
+  @JoinColumn(name = "id_category", nullable = false)
+  @ManyToOne()
+  private Category category;
 
 
 
