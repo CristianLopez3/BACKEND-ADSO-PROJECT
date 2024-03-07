@@ -3,6 +3,8 @@ package edu.menueasy.adso.domain.User;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import jakarta.validation.constraints.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -11,7 +13,9 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UserServiceImp implements UserService {
 
+
 	private UserRepository userRepository;
+
 
 	@Override
 	public List<UserDto> getUsers() {
@@ -29,7 +33,7 @@ public class UserServiceImp implements UserService {
 	}
 
 	@Override
-	public void createUser(UserDto userDto) {
+	public void createUser(@NotNull UserDto userDto) {
 		User user = new User();
 		user.setName(userDto.name());
 		user.setLastName(userDto.lastName());

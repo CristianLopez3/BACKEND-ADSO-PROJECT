@@ -1,6 +1,5 @@
 package edu.menueasy.adso.domain.User;
 
-import java.math.BigInteger;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 

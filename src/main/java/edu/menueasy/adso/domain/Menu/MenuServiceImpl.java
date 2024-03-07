@@ -4,21 +4,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import edu.menueasy.adso.domain.category.CategoryRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.menueasy.adso.domain.User.UserDto;
 
 @Service
+@AllArgsConstructor
 public class MenuServiceImpl implements IMenuService {
 
 	private MenuRepository menuRepository;
 	private CategoryRepository  categoryRepository;
 	
-	@Autowired
-	public MenuServiceImpl(MenuRepository menuRepository) {
-		this.menuRepository = menuRepository;
-	}
+
 
 	@Override
 	public ListMenuDto getMenu(Integer id) {
@@ -41,7 +40,7 @@ public class MenuServiceImpl implements IMenuService {
 		menu.setDescription(menuDto.description());
 		menu.setPrice(menuDto.price());
 		menu.setState(menuDto.state());
-		menu.setCategory(categoryRepository.findById(menuDto.id()).orElseThrow(() -> new RuntimeException("Can't find menu with id: "+ menuDto.id()) ));
+		menu.setCategory(categoryRepository.findById(menuDto.idCategory()).orElseThrow(() -> new RuntimeException("Can't find category with id: "+ menuDto.idCategory()) ));
 
 		try {
 			menuRepository.save(menu);

@@ -17,7 +17,6 @@ public class MenuController {
 	@Autowired
 	private MenuServiceImpl menuService;
 	
-	
 	@GetMapping()
 	public ResponseEntity<List<ListMenuDto>> getMenus(){
 		return ResponseEntity.ok(menuService.getAll());
