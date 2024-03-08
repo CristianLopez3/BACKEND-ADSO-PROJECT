@@ -2,6 +2,7 @@ package edu.menueasy.adso.controller;
 
 import edu.menueasy.adso.domain.Menu.CreateMenuDto;
 import edu.menueasy.adso.domain.Menu.ListMenuDto;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,14 +13,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/menus")
 @CrossOrigin("*")
+@AllArgsConstructor
 public class MenuController {
 
-	@Autowired
+
 	private MenuServiceImpl menuService;
 	
 	@GetMapping()
 	public ResponseEntity<List<ListMenuDto>> getMenus(){
 		return ResponseEntity.ok(menuService.getAll());
+	}
+
+	@GetMapping("/category/{id}")
+	public ResponseEntity<List<ListMenuDto>> getMenusByCategory(@PathVariable("id") Integer id){
+		return ResponseEntity.ok(menuService.findByCategory(id));
 	}
 
 	@PostMapping()

@@ -64,5 +64,13 @@ public class MenuServiceImpl implements IMenuService {
 	public void deleteMenu(Integer id) {
 		menuRepository.deleteById(id);
 	}
-	
+
+	@Override
+	public List<ListMenuDto> findByCategory(Integer idCategory) {
+		return menuRepository.findByCategoryId(idCategory)
+				.stream()
+				.map(menu -> new ListMenuDto(menu))
+				.collect(Collectors.toList());
+	}
+
 }

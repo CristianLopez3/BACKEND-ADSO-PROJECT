@@ -18,15 +18,20 @@ public class Menu {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
+
   @Column(name = "title", nullable = false)
   private String title;
+
   @Column(name = "description", nullable = false)
   private String description;
+
   @Column(name = "price", nullable = false)
   private Double price;
+
   @Column(name = "state", nullable = false)
   private Boolean state;
-  @JoinColumn(name = "id_category", nullable = false)
+
+  @JoinColumn(name = "category", nullable = false)
   @ManyToOne()
   private Category category;
 
