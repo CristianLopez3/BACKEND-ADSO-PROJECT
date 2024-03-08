@@ -11,7 +11,7 @@ public record UserDto(
 		@NotNull String identification, 
 		@NotNull String password, 
 		@NotNull Long cellphone, 
-		@NotNull Role role) {
+		@NotNull String role) {
 	public UserDto(User user) {
 		this(
 				user.getId(), 

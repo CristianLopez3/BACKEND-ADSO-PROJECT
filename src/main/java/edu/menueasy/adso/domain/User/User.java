@@ -47,7 +47,7 @@ public class User {
 
   @Column(name = "role", nullable = false, length = 50)
   @Getter
-  private Role role;
+  private String role;
 
 
 
