@@ -2,7 +2,7 @@ package edu.menueasy.adso.domain.Menu;
 
 import edu.menueasy.adso.domain.category.Category;
 
-public record ListMenuDto (
+public record DTOListMenu(
 		Integer id,
 		String title, 
 		String description,
@@ -13,7 +13,7 @@ public record ListMenuDto (
 
 	){
 
-	public ListMenuDto(Menu menu) {
+	public DTOListMenu(Menu menu) {
 		this(
 				menu.getId(),
 				menu.getTitle(),

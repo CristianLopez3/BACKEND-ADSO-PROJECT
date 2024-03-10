@@ -1,8 +1,6 @@
 package edu.menueasy.adso.domain.Menu;
 
-import org.springframework.web.multipart.MultipartFile;
-
-public record CreateMenuDto(
+public record DTOCreateMenu(
         String title,
         String description,
         Double price,

@@ -1,7 +1,7 @@
 package edu.menueasy.adso.controller;
 
-import edu.menueasy.adso.domain.Menu.file.FileResponse;
-import edu.menueasy.adso.domain.Menu.file.FilesService;
+import edu.menueasy.adso.domain.Menu.image.ImageResponse;
+import edu.menueasy.adso.domain.Menu.image.IImageService;
 import org.springframework.core.io.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,14 +22,14 @@ import java.nio.file.Paths;
 public class ImageController {
 
     @Autowired
-    private FilesService filesService;
+    private IImageService filesService;
 
     @Value("${project.image}")
     private String path;
 
 
     @PostMapping("/upload")
-    public ResponseEntity<FileResponse> fileUpload(
+    public ResponseEntity<ImageResponse> fileUpload(
             @RequestParam("image")MultipartFile image
     ){
         String fileName = null;
@@ -38,13 +38,13 @@ public class ImageController {
         } catch (IOException e) {
             e.printStackTrace();
             return new ResponseEntity<>(
-                    new FileResponse(null, "Can't file image!!"),
+                    new ImageResponse(null, "Can't file image!!"),
                     HttpStatus.INTERNAL_SERVER_ERROR
             );
         }
 
         return new ResponseEntity<>(
-                new FileResponse(
+                new ImageResponse(
                         fileName,
                         "Image is successfully upload !!"),
                 HttpStatus.OK

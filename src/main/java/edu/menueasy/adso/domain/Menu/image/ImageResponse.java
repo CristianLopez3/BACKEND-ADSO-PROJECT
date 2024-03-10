@@ -1,11 +1,11 @@
-package edu.menueasy.adso.domain.Menu.file;
+package edu.menueasy.adso.domain.Menu.image;
 
-public class FileResponse {
+public class ImageResponse {
 
     private String fileName;
     private String message;
 
-    public FileResponse(String fileName, String message) {
+    public ImageResponse(String fileName, String message) {
         this.fileName = fileName;
         this.message = message;
     }

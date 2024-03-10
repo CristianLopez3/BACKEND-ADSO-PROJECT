@@ -6,16 +6,16 @@ import java.util.List;
 
 public interface IMenuService {
 
-	 ListMenuDto getMenu(Integer id);
+	 DTOListMenu getMenu(Integer id);
 	
-	 List<ListMenuDto> getAll();
+	 List<DTOListMenu> getAll();
 	
-	 ListMenuDto create(CreateMenuDto menuDto, MultipartFile image);
+	 DTOListMenu create(DTOCreateMenu menuDto, MultipartFile image);
 	
-	 ListMenuDto updateMenu(CreateMenuDto menuDto, Integer id);
+	 DTOListMenu updateMenu(DTOCreateMenu menuDto, Integer id);
 	
 	 void deleteMenu(Integer id);
 
-	List<ListMenuDto> findByCategory(Integer idCategory);
+	List<DTOListMenu> findByCategory(Integer idCategory);
 	
 }

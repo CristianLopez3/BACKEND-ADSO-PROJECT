@@ -2,11 +2,10 @@ package edu.menueasy.adso.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.menueasy.adso.domain.Menu.CreateMenuDto;
-import edu.menueasy.adso.domain.Menu.ListMenuDto;
+import edu.menueasy.adso.domain.Menu.DTOCreateMenu;
+import edu.menueasy.adso.domain.Menu.DTOListMenu;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,36 +24,36 @@ public class MenuController {
 	private MenuServiceImpl menuService;
 	
 	@GetMapping()
-	public ResponseEntity<List<ListMenuDto>> getMenus(){
+	public ResponseEntity<List<DTOListMenu>> getMenus(){
 		return ResponseEntity.ok(menuService.getAll());
 	}
 
 	@GetMapping("/category/{id}")
-	public ResponseEntity<List<ListMenuDto>> getMenusByCategory(@PathVariable("id") Integer id){
+	public ResponseEntity<List<DTOListMenu>> getMenusByCategory(@PathVariable("id") Integer id){
 		return ResponseEntity.ok(menuService.findByCategory(id));
 	}
 
 	@PostMapping()
 	@Transactional()
-	public ResponseEntity<ListMenuDto> createMenu(
+	public ResponseEntity<DTOListMenu> createMenu(
 					@RequestParam("image") MultipartFile image,
 					@RequestPart("menu") String menuStr
 	) throws JsonProcessingException {
 
 		ObjectMapper objectMapper = new ObjectMapper();
-		CreateMenuDto menu = objectMapper.readValue(menuStr, CreateMenuDto.class);
+		DTOCreateMenu menu = objectMapper.readValue(menuStr, DTOCreateMenu.class);
 		return ResponseEntity.ok(menuService.create(menu, image));
 
 	}
 
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ListMenuDto> updateMenu(@RequestBody CreateMenuDto menu, @PathVariable Integer id){
+	public ResponseEntity<DTOListMenu> updateMenu(@RequestBody DTOCreateMenu menu, @PathVariable Integer id){
 		return ResponseEntity.ok(menuService.updateMenu(menu, id));
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<ListMenuDto> getMenu(@PathVariable Integer id){
+	public ResponseEntity<DTOListMenu> getMenu(@PathVariable Integer id){
 		return ResponseEntity.ok(menuService.getMenu(id));
 	}
 

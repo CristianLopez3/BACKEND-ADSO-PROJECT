@@ -1,4 +1,4 @@
-package edu.menueasy.adso.domain.Menu.file;
+package edu.menueasy.adso.domain.Menu.image;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.UUID;
 
 @Service
-public class ImplFileService implements FilesService{
+public class ImageServiceImpl implements IImageService {
 
     @Override
     public String uploadImage(String path, MultipartFile file) throws IOException {
