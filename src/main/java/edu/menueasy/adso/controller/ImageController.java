@@ -18,6 +18,7 @@ import java.nio.file.Paths;
 
 @RestController
 @RequestMapping("/file")
+@CrossOrigin("*")
 public class ImageController {
 
     @Autowired
