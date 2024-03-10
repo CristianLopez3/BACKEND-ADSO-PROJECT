@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.UUID;
 
 @Service
 public class ImplFileService implements FilesService{
@@ -15,9 +16,11 @@ public class ImplFileService implements FilesService{
     public String uploadImage(String path, MultipartFile file) throws IOException {
         // File name
         String name = file.getOriginalFilename();
+        String randomID = UUID.randomUUID().toString();
+        String fileName1 = randomID.concat( name.substring(name.lastIndexOf(".")));
 
         // Full path
-        String filePath = path + File.separator + name;
+        String filePath = path + File.separator + fileName1;
 
         // create folder if not exists
         File fileF = new File(path);

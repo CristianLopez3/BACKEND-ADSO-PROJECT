@@ -2,19 +2,19 @@ package edu.menueasy.adso.controller;
 
 import edu.menueasy.adso.domain.file.FileResponse;
 import edu.menueasy.adso.domain.file.FilesService;
-import org.apache.coyote.Request;
-import org.apache.coyote.Response;
+import org.springframework.core.io.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @RestController
 @RequestMapping("/file")
@@ -48,6 +48,16 @@ public class ImageController {
                         "Image is successfully upload !!"),
                 HttpStatus.OK
         );
+    }
+
+    @GetMapping("/{name}")
+    public ResponseEntity<Resource> getImage(@PathVariable String name)throws IOException{
+        Path imagePath = Paths.get(path).resolve(name);
+        Resource resource = new UrlResource(imagePath.toUri());
+        return ResponseEntity.ok()
+                .contentType(MediaType.IMAGE_JPEG)
+                .body(resource);
+
     }
 
 }
