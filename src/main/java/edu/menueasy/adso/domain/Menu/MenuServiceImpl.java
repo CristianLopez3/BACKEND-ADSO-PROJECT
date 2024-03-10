@@ -56,6 +56,8 @@ public class MenuServiceImpl implements IMenuService {
 		menu.setTitle(menuDto.title());
 		menu.setDescription(menuDto.description());
 		menu.setPrice(menuDto.price());
+		menu.setCategory(categoryRepository.findById(menuDto.idCategory()).orElseThrow(() -> new RuntimeException("Can't find category with id: "+menuDto.idCategory())));
+		menu.setState(menuDto.state());
 		menuRepository.save(menu);
 		return new ListMenuDto(menu);
 	}
