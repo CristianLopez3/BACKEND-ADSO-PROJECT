@@ -19,19 +19,22 @@ public class Menu {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  @Column(name = "title", nullable = false)
+  @Column(name = "title")
   private String title;
 
-  @Column(name = "description", nullable = false)
+  @Column(name = "description")
   private String description;
 
-  @Column(name = "price", nullable = false)
+  @Column(name = "price")
   private Double price;
 
-  @Column(name = "state", nullable = false)
+  @Column(name = "state")
   private Boolean state;
 
-  @JoinColumn(name = "category", nullable = false)
+  @Column(name = "imageName")
+  private String imageName;
+
+  @JoinColumn(name = "category")
   @ManyToOne()
   private Category category;
 

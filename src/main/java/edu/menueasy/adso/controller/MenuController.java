@@ -1,13 +1,18 @@
 package edu.menueasy.adso.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.menueasy.adso.domain.Menu.CreateMenuDto;
 import edu.menueasy.adso.domain.Menu.ListMenuDto;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import edu.menueasy.adso.domain.Menu.MenuServiceImpl;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 @RestController
@@ -30,8 +35,16 @@ public class MenuController {
 	}
 
 	@PostMapping()
-	public ResponseEntity<ListMenuDto> createMenu(@RequestBody CreateMenuDto menu){
-		return ResponseEntity.ok(menuService.create(menu));
+	@Transactional()
+	public ResponseEntity<ListMenuDto> createMenu(
+					@RequestParam("image") MultipartFile image,
+					@RequestPart("menu") String menuStr
+	) throws JsonProcessingException {
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		CreateMenuDto menu = objectMapper.readValue(menuStr, CreateMenuDto.class);
+		return ResponseEntity.ok(menuService.create(menu, image));
+
 	}
 
 

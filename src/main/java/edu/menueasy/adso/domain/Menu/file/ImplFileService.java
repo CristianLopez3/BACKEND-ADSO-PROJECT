@@ -1,4 +1,4 @@
-package edu.menueasy.adso.domain.file;
+package edu.menueasy.adso.domain.Menu.file;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,12 +28,10 @@ public class ImplFileService implements FilesService{
             fileF.mkdir();
         }
 
-
         // file copy
-
         Files.copy(file.getInputStream(), Paths.get(filePath));
 
-        return name;
+        return fileName1;
     }
 
 }

@@ -1,5 +1,7 @@
 package edu.menueasy.adso.domain.Menu;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 public interface IMenuService {
@@ -8,7 +10,7 @@ public interface IMenuService {
 	
 	 List<ListMenuDto> getAll();
 	
-	 ListMenuDto create(CreateMenuDto menuDto);
+	 ListMenuDto create(CreateMenuDto menuDto, MultipartFile image);
 	
 	 ListMenuDto updateMenu(CreateMenuDto menuDto, Integer id);
 	

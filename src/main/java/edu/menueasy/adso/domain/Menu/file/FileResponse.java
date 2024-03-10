@@ -1,4 +1,4 @@
-package edu.menueasy.adso.domain.file;
+package edu.menueasy.adso.domain.Menu.file;
 
 public class FileResponse {
 

@@ -1,4 +1,4 @@
-package edu.menueasy.adso.domain.file;
+package edu.menueasy.adso.domain.Menu.file;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

@@ -1,7 +1,7 @@
 package edu.menueasy.adso.controller;
 
-import edu.menueasy.adso.domain.file.FileResponse;
-import edu.menueasy.adso.domain.file.FilesService;
+import edu.menueasy.adso.domain.Menu.file.FileResponse;
+import edu.menueasy.adso.domain.Menu.file.FilesService;
 import org.springframework.core.io.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

@@ -8,6 +8,7 @@ public record ListMenuDto (
 		String description,
 		Double price,
 		Boolean state,
+		String imageName,
 		Category category
 
 	){
@@ -19,6 +20,7 @@ public record ListMenuDto (
 				menu.getDescription(),
 				menu.getPrice(),
 				menu.getState(),
+				menu.getImageName(),
 				menu.getCategory()
 		);
 
