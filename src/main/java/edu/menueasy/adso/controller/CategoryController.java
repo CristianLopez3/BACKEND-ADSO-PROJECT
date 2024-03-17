@@ -26,4 +26,6 @@ public class CategoryController {
     return ResponseEntity.ok(categoryRepository.findAll());
   }
 
+
+
 }

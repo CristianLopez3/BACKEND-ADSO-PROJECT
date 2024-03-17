@@ -36,4 +36,9 @@ public class ReservationServiceImpl {
         return reservationRepository.save(reservation);
     }
 
+    public Reservation checkReservation(Long id, DTOCheckReservation reservationDto) {
+        Reservation reservation =  reservationRepository.findById(id).orElseThrow(() -> new RuntimeException("Can't find this reservation, try again"));
+        reservation.setCheckedIn(reservationDto.checkedIn());
+        return reservationRepository.save(reservation);
+    }
 }

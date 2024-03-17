@@ -1,8 +1,10 @@
 package edu.menueasy.adso.controller;
 
+import edu.menueasy.adso.domain.reservation.DTOCheckReservation;
 import edu.menueasy.adso.domain.reservation.ReservationServiceImpl;
 import edu.menueasy.adso.domain.reservation.Reservation;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/reservations")
 @AllArgsConstructor
+@CrossOrigin("*")
 public class ReservationController {
 
 
@@ -36,11 +39,16 @@ public class ReservationController {
     }
 
     @PutMapping("/{id}")
-    public Reservation updateReservation(@PathVariable Long id, @RequestBody Reservation reservation) {
+    public ResponseEntity<Reservation> updateReservation(@PathVariable Long id, @RequestBody Reservation reservation) {
         if (!id.equals(reservation.getId())) {
             throw new IllegalArgumentException("ID in the path and ID in the reservation object must be the same.");
         }
-        return reservationService.updateReservation(reservation);
+        return ResponseEntity.ok(reservationService.updateReservation(reservation));
+    }
+
+    @PutMapping("/check/{id}")
+    public ResponseEntity<Reservation> checkReservation(@PathVariable("id") Long id, @RequestBody DTOCheckReservation reservation){
+        return ResponseEntity.ok(reservationService.checkReservation(id, reservation));
     }
 
 
