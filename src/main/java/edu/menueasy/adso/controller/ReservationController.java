@@ -46,7 +46,7 @@ public class ReservationController {
         return ResponseEntity.ok(reservationService.updateReservation(reservation));
     }
 
-    @PutMapping("/check/{id}")
+    @PatchMapping("/check/{id}")
     public ResponseEntity<Reservation> checkReservation(@PathVariable("id") Long id, @RequestBody DTOCheckReservation reservation){
         System.out.println(reservation.checkedIn());
         ResponseEntity<Reservation> ok = ResponseEntity.ok(reservationService.checkReservation(id, reservation));
