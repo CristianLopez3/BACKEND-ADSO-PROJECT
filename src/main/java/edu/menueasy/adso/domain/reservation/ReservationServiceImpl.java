@@ -41,4 +41,5 @@ public class ReservationServiceImpl {
         reservation.setCheckedIn(reservationDto.checkedIn());
         return reservationRepository.save(reservation);
     }
+
 }

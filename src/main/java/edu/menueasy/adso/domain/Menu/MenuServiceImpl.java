@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import edu.menueasy.adso.domain.Menu.image.DTOUpdateStateMenu;
 import edu.menueasy.adso.domain.Menu.image.ImageServiceImpl;
 import edu.menueasy.adso.domain.category.CategoryRepository;
+import edu.menueasy.adso.domain.reservation.DTOCheckReservation;
+import edu.menueasy.adso.domain.reservation.Reservation;
 import edu.menueasy.adso.infra.exceptions.menu.CategoryNotFoundException;
 import edu.menueasy.adso.infra.exceptions.menu.ImageUploadException;
 import edu.menueasy.adso.infra.exceptions.menu.InvalidMenuException;
@@ -81,6 +84,13 @@ public class MenuServiceImpl implements IMenuService {
 				.stream()
 				.map(DTOListMenu::new)
 				.collect(Collectors.toList());
+	}
+
+	public DTOListMenu changeState(Integer id, DTOUpdateStateMenu dtoState) {
+		Menu menu =  menuRepository.findById(id).orElseThrow(() -> new RuntimeException("Can't find this reservation, try again"));
+		menu.setState(dtoState.state());
+
+		return new DTOListMenu(menuRepository.save(menu));
 	}
 
 	private void validateMenuDto(DTOCreateMenu menuDto) {

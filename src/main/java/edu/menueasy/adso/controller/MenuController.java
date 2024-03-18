@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.menueasy.adso.domain.Menu.DTOCreateMenu;
 import edu.menueasy.adso.domain.Menu.DTOListMenu;
+import edu.menueasy.adso.domain.Menu.image.DTOUpdateStateMenu;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -46,7 +47,6 @@ public class MenuController {
 
 	}
 
-
 	@PutMapping("/{id}")
 	public ResponseEntity<DTOListMenu> updateMenu(@RequestBody DTOCreateMenu menu, @PathVariable Integer id){
 		return ResponseEntity.ok(menuService.updateMenu(menu, id));
@@ -63,7 +63,13 @@ public class MenuController {
 		return ResponseEntity.ok("Menu deleted with success!");
 	}
 
+	@PatchMapping("/state/{id}")
+	public ResponseEntity<DTOListMenu> changeState(@PathVariable("id") Integer id, @RequestBody DTOUpdateStateMenu menuState){
+		return ResponseEntity.ok(menuService.changeState(id, menuState));
+	}
 
-	
-	
+
+
+
+
 }
