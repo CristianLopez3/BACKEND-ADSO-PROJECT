@@ -4,9 +4,12 @@ import edu.menueasy.adso.domain.reservation.ReservationCheckDto;
 import edu.menueasy.adso.domain.reservation.ReservationServiceImpl;
 import edu.menueasy.adso.domain.reservation.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.HashMap;
 import java.util.List;
@@ -85,4 +88,14 @@ public class ReservationController {
 
         return monthlyReservations;
     }
+
+    @GetMapping("/between-dates")
+    public ResponseEntity<List<Reservation>> getReservationsBetweenDates(
+            @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
+            @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
+        List<Reservation> reservations = reservationService.getReservationsBetweenDates(start, end);
+        return new ResponseEntity<>(reservations, HttpStatus.OK);
+    }
+
+
 }

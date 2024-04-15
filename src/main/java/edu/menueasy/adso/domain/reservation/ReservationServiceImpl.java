@@ -2,6 +2,8 @@ package edu.menueasy.adso.domain.reservation;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -45,5 +47,10 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public List<Object[]> getMonthlyReservationCounts() {
         return reservationRepository.getMonthlyReservationCounts();
+    }
+
+    @Override
+    public List<Reservation> getReservationsBetweenDates(LocalDateTime start, LocalDateTime end) {
+        return null;
     }
 }
