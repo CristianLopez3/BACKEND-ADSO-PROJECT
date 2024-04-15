@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Month;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/reservations")
@@ -17,10 +20,12 @@ public class ReservationController {
 
     private ReservationServiceImpl reservationService;
 
+
     @Autowired
     public ReservationController(ReservationServiceImpl reservationService) {
         this.reservationService = reservationService;
     }
+
 
     @PostMapping
     public Reservation createReservation(@RequestBody Reservation reservation) {
@@ -62,5 +67,22 @@ public class ReservationController {
         return "Greetings from patch";
     }
 
+    @GetMapping("/mes")
+    public Map<String, Integer> getMonthlyReservations() {
+        List<Object[]> monthlyCounts = reservationService.getMonthlyReservationCounts();
+        Map<String, Integer> monthlyReservations = new HashMap<>();
 
+        for (Object[] result : monthlyCounts) {
+            Month month = (Month) result[0];
+            Long count = (Long) result[1];
+            monthlyReservations.put(month.toString(), count.intValue());
+        }
+
+        // Fill in missing months with zero reservations
+        for (Month month : Month.values()) {
+            monthlyReservations.putIfAbsent(month.toString(), 0);
+        }
+
+        return monthlyReservations;
+    }
 }

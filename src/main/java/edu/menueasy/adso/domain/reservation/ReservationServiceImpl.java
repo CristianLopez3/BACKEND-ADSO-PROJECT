@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class ReservationServiceImpl {
+public class ReservationServiceImpl implements ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final ReservationValidator reservationValidator;
@@ -42,4 +42,8 @@ public class ReservationServiceImpl {
         return reservationRepository.save(reservation);
     }
 
+    @Override
+    public List<Object[]> getMonthlyReservationCounts() {
+        return reservationRepository.getMonthlyReservationCounts();
+    }
 }
