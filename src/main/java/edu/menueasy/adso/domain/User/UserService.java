@@ -1,4 +1,4 @@
-package edu.menueasy.adso.domain.User;
+package edu.menueasy.adso.domain.user;
 
 import java.util.List;
 
@@ -6,12 +6,12 @@ public interface UserService {
 
 	public List<UserDto> getUsers();
 	
-	public UserDto getUserById();
+	public UserDto getUserById(Long id);
 	
 	public void createUser(UserDto userDto);
 	
-	public void updateUser(UserDto userDto, Integer id);
+	public void updateUser(UserDto userDto, Long id);
 	
-	public void deleteUser(Integer id);
+	public void deleteUser(Long id);
 	
 }
