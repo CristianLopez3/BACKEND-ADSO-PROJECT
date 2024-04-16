@@ -1,9 +1,9 @@
-package edu.menueasy.adso.domain.User;
+package edu.menueasy.adso.domain.category;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
 }
