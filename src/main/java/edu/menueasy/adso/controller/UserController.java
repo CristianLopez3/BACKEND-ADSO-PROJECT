@@ -2,6 +2,7 @@ package edu.menueasy.adso.controller;
 
 import java.util.List;
 
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -69,6 +70,13 @@ public class UserController {
     ){
         userService.updateUser(userDto, id);
         return ResponseEntity.ok(userDto);
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<Long> countUser(){
+
+        long countUser = userService.countUser();
+        return ResponseEntity.ok(userService.countUser());
     }
 
 }

@@ -17,5 +17,7 @@ public interface MenuService {
 	 void deleteMenu(Integer id);
 
 	List<MenuListDTO> findByCategory(Integer idCategory);
+
+	Long countMenus();
 	
 }

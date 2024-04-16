@@ -42,4 +42,9 @@ public class ReservationServiceImpl {
         return reservationRepository.save(reservation);
     }
 
+    @Override
+    public Long countReservation(){
+        return reservationRepository.count();
+    }
+
 }

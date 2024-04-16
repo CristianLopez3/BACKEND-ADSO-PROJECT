@@ -1,6 +1,7 @@
 package edu.menueasy.adso.controller;
 
 import edu.menueasy.adso.domain.reservation.ReservationCheckDto;
+import edu.menueasy.adso.domain.reservation.ReservationService;
 import edu.menueasy.adso.domain.reservation.ReservationServiceImpl;
 import edu.menueasy.adso.domain.reservation.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,12 @@ public class ReservationController {
     @PatchMapping("/patch")
     public String patch(){
         return "Greetings from patch";
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<Long> countReservation(){
+        long countReservation = reservationService.countReservation();
+        return ResponseEntity.ok(reservationService.countReservation());
     }
 
 
