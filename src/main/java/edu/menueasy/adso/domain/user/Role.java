@@ -1,4 +1,4 @@
-package edu.menueasy.adso.domain.User;
+package edu.menueasy.adso.domain.user;
 
 public enum Role {
   ADMIN,

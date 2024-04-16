@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class ReservationServiceImpl {
+public class ReservationServiceImpl implements ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final ReservationValidator reservationValidator;
