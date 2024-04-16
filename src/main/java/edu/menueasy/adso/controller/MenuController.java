@@ -72,6 +72,12 @@ public class MenuController {
 		return ResponseEntity.ok(menuService.changeState(id, menuState));
 	}
 
+	@GetMapping("/count")
+	public ResponseEntity<Long> countMenus(){
+		long countMenus = menuService.countMenus();
+		return ResponseEntity.ok(menuService.countMenus());
+	}
+
 
 
 

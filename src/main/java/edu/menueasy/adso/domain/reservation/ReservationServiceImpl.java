@@ -46,4 +46,9 @@ public class ReservationServiceImpl implements ReservationService {
     public List<Object[]> getMonthlyReservationCounts() {
         return reservationRepository.getMonthlyReservationCounts();
     }
+    @Override
+    public Long countReservation(){
+        return reservationRepository.count();
+    }
+
 }
