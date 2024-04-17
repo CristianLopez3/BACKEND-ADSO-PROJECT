@@ -16,7 +16,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     public Reservation createReservation(Reservation reservation) {
         reservationValidator.validate(reservation);
-        reservation.setCheckedin(false); // Set checkedIn to false when creating a new reservation
+        reservation.setCheckedIn(false); // Set checkedIn to false when creating a new reservation
         return reservationRepository.save(reservation);
     }
 
@@ -26,11 +26,11 @@ public class ReservationServiceImpl implements ReservationService {
 
 
     public List<Reservation> getCheckedInReservations() {
-        return reservationRepository.findByCheckedinIsTrue();
+        return reservationRepository.findByCheckedInIsTrue();
     }
 
     public List<Reservation> getUncheckedInReservations() {
-        return reservationRepository.findByCheckedinIsFalse();
+        return reservationRepository.findByCheckedInIsFalse();
     }
 
     public Reservation updateReservation(Reservation reservation) {
@@ -40,7 +40,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     public Reservation checkReservation(Long id, ReservationCheckDto reservationDto) {
         Reservation reservation =  reservationRepository.findById(id).orElseThrow(() -> new RuntimeException("Can't find this reservation, try again"));
-        reservation.setCheckedin(reservationDto.checkedIn());
+        reservation.setCheckedIn(reservationDto.checkedIn());
         return reservationRepository.save(reservation);
     }
 

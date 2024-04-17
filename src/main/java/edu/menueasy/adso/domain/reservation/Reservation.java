@@ -21,17 +21,17 @@ public class Reservation {
 
     private String name;
     @Column(name = "phone_number")
-    private String phonenumber;
+    private String phoneNumber;
     private String email;
 
     @Column(columnDefinition = "TIMESTAMP", name = "reservation_date")
-    private LocalDateTime reservationdate;
+    private LocalDateTime reservationDate;
 
     @Column(name = "number_of_people")
-    private Integer numberofpeople;
+    private Integer numberOfPeople;
     private String description;
     @Column(name = "checked_in")
-    private Boolean checkedin;
+    private Boolean checkedIn;
 
 
 }

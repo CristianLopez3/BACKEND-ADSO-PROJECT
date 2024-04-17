@@ -38,7 +38,7 @@ public class MenuController {
 		return ResponseEntity.ok(menuService.findByCategory(id));
 	}
 
-	@PostMapping()
+	@PostMapping
 	@Transactional()
 	public ResponseEntity<MenuListDTO> createMenu(
 					@RequestParam("image") MultipartFile image,
