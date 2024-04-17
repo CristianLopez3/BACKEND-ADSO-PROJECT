@@ -1,0 +1,10 @@
+CREATE TABLE RESERVATIONS (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(250) NOT NULL,
+    phoneNumber VARCHAR(250) NOT NULL,
+    email VARCHAR(250) NOT NULL,
+    reservationDate TIMESTAMP NOT NULL,
+    numberOfPeople INT NOT NULL,
+    description VARCHAR(250),
+    checkedIn BOOLEAN NOT NULL
+);
