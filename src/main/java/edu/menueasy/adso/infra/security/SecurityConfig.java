@@ -39,6 +39,8 @@ public class SecurityConfig  {
                         .requestMatchers("/api/v1/auth/register/**").permitAll()
                         .requestMatchers("/api/v1/auth/login/**").permitAll()
                         .requestMatchers("/api/v1/file/**").permitAll()
+                        .requestMatchers("/api/v1/reservations/**").permitAll()
+
                         .anyRequest().authenticated()
                 )
                  .userDetailsService(customUserDetailsService)

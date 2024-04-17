@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.HashMap;
 import java.util.List;
@@ -56,7 +57,7 @@ public class ReservationController {
 
     @PatchMapping("/check/{id}")
     public ResponseEntity<Reservation> checkReservation(@PathVariable("id") Long id, @RequestBody ReservationCheckDto reservation){
-        System.out.println(reservation.checkedIn());
+
         ResponseEntity<Reservation> ok = ResponseEntity.ok(reservationService.checkReservation(id, reservation));
         return ok;
     }
@@ -90,4 +91,15 @@ public class ReservationController {
 
         return monthlyReservations;
     }
+
+    @PostMapping("/between-dates")
+    public ResponseEntity<Long> getReservationsBetweenDates(@RequestParam(name = "start") String start,
+                                                            @RequestParam(name = "end") String end) {
+        LocalDateTime startDate = LocalDateTime.parse(start);
+        LocalDateTime endDate = LocalDateTime.parse(end);
+        Long reservations = reservationService.getReservationBetweenDate(startDate, endDate);
+        return ResponseEntity.ok().body(reservations);
+    }
+
+
 }
