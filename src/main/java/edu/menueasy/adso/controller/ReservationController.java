@@ -89,12 +89,13 @@ public class ReservationController {
         return monthlyReservations;
     }
 
-    @GetMapping("/between-dates")
-    public ResponseEntity<List<Reservation>> getReservationsBetweenDates(
-            @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
-            @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
-        List<Reservation> reservations = reservationService.getReservationsBetweenDates(start, end);
-        return new ResponseEntity<>(reservations, HttpStatus.OK);
+    @PostMapping("/between-dates")
+    public ResponseEntity<List<Reservation>> getReservationsBetweenDates(@RequestBody String start,
+                                                                         @RequestBody String end) {
+        LocalDateTime startDate = LocalDateTime.parse(start);
+        LocalDateTime endDate = LocalDateTime.parse(end);
+        List<Reservation> reservations = reservationService.getReservationsBetweenDates(startDate, endDate);
+        return ResponseEntity.ok().body(reservations);
     }
 
 
