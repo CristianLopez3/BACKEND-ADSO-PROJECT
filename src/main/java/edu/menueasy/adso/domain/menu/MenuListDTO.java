@@ -8,7 +8,7 @@ public record MenuListDTO(
 		String description,
 		Double price,
 		Boolean state,
-		String imageName,
+		String imagename,
 		Category category
 
 	){
@@ -20,7 +20,7 @@ public record MenuListDTO(
 				menu.getDescription(),
 				menu.getPrice(),
 				menu.getState(),
-				menu.getImageName(),
+				menu.getImagename(),
 				menu.getCategory()
 		);
 

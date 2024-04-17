@@ -13,7 +13,7 @@ public class ReservationValidator {
 
   public void validate(Reservation reservation) {
     LocalDateTime now = LocalDateTime.now();
-    LocalDateTime reservationDate = reservation.getReservationDate();
+    LocalDateTime reservationDate = reservation.getReservationdate();
 
     if (reservationDate.isBefore(now.plusHours(6))) {
       throw new IllegalArgumentException("Reservations must be made at least 6 hours in advance.");

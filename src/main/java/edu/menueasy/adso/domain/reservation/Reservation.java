@@ -20,15 +20,18 @@ public class Reservation {
     private Long id;
 
     private String name;
-    private String phoneNumber;
+    @Column(name = "phone_number")
+    private String phonenumber;
     private String email;
 
-    @Column(columnDefinition = "TIMESTAMP")
-    private LocalDateTime reservationDate;
+    @Column(columnDefinition = "TIMESTAMP", name = "reservation_date")
+    private LocalDateTime reservationdate;
 
-    private Integer numberOfPeople;
+    @Column(name = "number_of_people")
+    private Integer numberofpeople;
     private String description;
-    private Boolean checkedIn;
+    @Column(name = "checked_in")
+    private Boolean checkedin;
 
 
 }

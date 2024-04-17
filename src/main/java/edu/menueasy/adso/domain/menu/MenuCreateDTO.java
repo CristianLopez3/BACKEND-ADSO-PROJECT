@@ -6,6 +6,6 @@ public record MenuCreateDTO(
         String description,
         Double price,
         Boolean state,
-        Integer idCategory
+        Integer idcategory
 ) {
 }

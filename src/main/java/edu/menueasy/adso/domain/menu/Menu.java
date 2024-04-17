@@ -32,8 +32,8 @@ public class Menu {
   @Column(name = "state")
   private Boolean state;
 
-  @Column(name = "imageName")
-  private String imageName;
+  @Column(name = "image_name")
+  private String imagename;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "category_id")

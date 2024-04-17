@@ -1,10 +1,10 @@
 CREATE TABLE tb_users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    lastName VARCHAR(255) NOT NULL,
-    identification VARCHAR(255) NOT NULL,
-    cellphone BIGINT NOT NULL,
-    username VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    role ENUM('ADMIN', 'SUB_ADMIN', 'WAITRESS', 'BARTENDER', 'COOK') NOT NULL
+    name VARCHAR(255) ,
+    lastname VARCHAR(255) ,
+    identification VARCHAR(255),
+    cellphone BIGINT ,
+    username VARCHAR(255) UNIQUE,
+    password VARCHAR(255),
+    role ENUM('ADMIN', 'SUB_ADMIN', 'WAITRESS', 'BARTENDER', 'COOK')
 );

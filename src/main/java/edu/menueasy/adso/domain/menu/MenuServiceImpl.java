@@ -63,7 +63,7 @@ public class MenuServiceImpl implements MenuService {
 		menu.setTitle(menuDto.title());
 		menu.setDescription(menuDto.description());
 		menu.setPrice(menuDto.price());
-		menu.setCategory(categoryRepository.findById(menuDto.idCategory()).orElseThrow(() -> new RuntimeException("Can't find category with id: "+menuDto.idCategory())));
+		menu.setCategory(categoryRepository.findById(menuDto.idcategory()).orElseThrow(() -> new RuntimeException("Can't find category with id: "+menuDto.idcategory())));
 		menu.setState(menuDto.state());
 		menuRepository.save(menu);
 		return new MenuListDTO(menu);
@@ -117,8 +117,8 @@ public class MenuServiceImpl implements MenuService {
 		menu.setDescription(menuDto.description());
 		menu.setPrice(menuDto.price());
 		menu.setState(menuDto.state());
-		menu.setImageName(fileName);
-		menu.setCategory(categoryRepository.findById(menuDto.idCategory()).orElseThrow(() -> new CategoryNotFoundException(menuDto.idCategory())));
+		menu.setImagename(fileName);
+		menu.setCategory(categoryRepository.findById(menuDto.idcategory()).orElseThrow(() -> new CategoryNotFoundException(menuDto.idcategory())));
 		return menu;
 	}
 

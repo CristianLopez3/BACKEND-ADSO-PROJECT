@@ -2,6 +2,8 @@ package edu.menueasy.adso.domain.reservation;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -14,7 +16,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     public Reservation createReservation(Reservation reservation) {
         reservationValidator.validate(reservation);
-        reservation.setCheckedIn(false); // Set checkedIn to false when creating a new reservation
+        reservation.setCheckedin(false); // Set checkedIn to false when creating a new reservation
         return reservationRepository.save(reservation);
     }
 
@@ -24,11 +26,11 @@ public class ReservationServiceImpl implements ReservationService {
 
 
     public List<Reservation> getCheckedInReservations() {
-        return reservationRepository.findByCheckedInTrue();
+        return reservationRepository.findByCheckedinIsTrue();
     }
 
     public List<Reservation> getUncheckedInReservations() {
-        return reservationRepository.findByCheckedInFalse();
+        return reservationRepository.findByCheckedinIsFalse();
     }
 
     public Reservation updateReservation(Reservation reservation) {
@@ -38,17 +40,25 @@ public class ReservationServiceImpl implements ReservationService {
 
     public Reservation checkReservation(Long id, ReservationCheckDto reservationDto) {
         Reservation reservation =  reservationRepository.findById(id).orElseThrow(() -> new RuntimeException("Can't find this reservation, try again"));
-        reservation.setCheckedIn(reservationDto.checkedIn());
+        reservation.setCheckedin(reservationDto.checkedIn());
         return reservationRepository.save(reservation);
     }
 
     @Override
     public List<Object[]> getMonthlyReservationCounts() {
-        return reservationRepository.getMonthlyReservationCounts();
+        return reservationRepository.findMonthlyReservationCounts();
     }
+
     @Override
     public Long countReservation(){
         return reservationRepository.count();
     }
+
+
+    @Override
+    public Long getReservationBetweenDate(LocalDateTime start, LocalDateTime end){
+        return reservationRepository.countReservationsWithinDateRange(start, end);
+    }
+
 
 }
