@@ -21,18 +21,23 @@ public class SecurityConfig  {
 
     private final UserDetailsServiceImpl customUserDetailsService;
     private final JWTAuthenticationFilter jwtAuthenticationFilter;
-    public SecurityConfig(UserDetailsServiceImpl customUserDetailsService, JWTAuthenticationFilter jwtAuthenticationFilter) {
+    private final JwtAuthEntryPoint jwtAuthEntryPoint;
+    public SecurityConfig(UserDetailsServiceImpl customUserDetailsService,
+                          JWTAuthenticationFilter jwtAuthenticationFilter,
+                          JwtAuthEntryPoint jwtAuthEntryPoint) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.customUserDetailsService = customUserDetailsService;
+        this.jwtAuthEntryPoint = jwtAuthEntryPoint;
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
          http
                 .csrf(AbstractHttpConfigurer::disable)
+                 .exceptionHandling(config -> config.authenticationEntryPoint(jwtAuthEntryPoint))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/v1/auth/register/**").permitAll()
-                        .requestMatchers("/api/v1/auth/login").permitAll()
+                        .requestMatchers("/api/v1/auth/login/**").permitAll()
                         .requestMatchers("/api/v1/file/**").permitAll()
                         .anyRequest().authenticated()
                 )

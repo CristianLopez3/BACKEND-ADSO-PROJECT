@@ -5,7 +5,6 @@ import edu.menueasy.adso.domain.user.User;
 import edu.menueasy.adso.domain.user.UserDto;
 import edu.menueasy.adso.domain.user.UserRepository;
 import edu.menueasy.adso.dto.AuthenticationResponse;
-import edu.menueasy.adso.dto.LoginDto;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -40,7 +39,7 @@ public class AuthenticationService {
     public AuthenticationResponse register(UserDto userDto){
         User user = User.builder()
                 .name(userDto.name())
-                .lastName(userDto.lastName())
+                .lastname(userDto.lastname())
                 .username(userDto.email())
                 .password(passwordEncoder.encode(userDto.password()))
                 .cellphone(userDto.cellphone())
@@ -66,6 +65,8 @@ public class AuthenticationService {
 
         User user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        System.out.println("0000000000000000000000000000000000000000000000");
+        System.out.println(user);
         String token = jwtService.generateToken(user);
 
         Date expiresIn = jwtService.extractClaims(token, Claims::getExpiration);

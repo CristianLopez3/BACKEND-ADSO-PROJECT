@@ -7,7 +7,6 @@ import edu.menueasy.adso.domain.role.Role;
 import edu.menueasy.adso.infra.exceptions.user.UserNotFoundException;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +41,7 @@ public class UserServiceImp implements UserService {
 	public void createUser(@NotNull UserDto userDto) {
 		User user = User.builder()
 				.name(userDto.name())
-				.lastName(userDto.lastName())
+				.lastname(userDto.lastname())
 				.username(userDto.email())
 				.password(encoder.encode(userDto.password()))
 				.cellphone(userDto.cellphone())
@@ -57,7 +56,7 @@ public class UserServiceImp implements UserService {
 		User user = userRepository.findById(id)
 				.orElseThrow(() -> new UserNotFoundException("User not found with ID: " + id));
 		user.setName(userDto.name());
-		user.setLastName(userDto.lastName());
+		user.setLastname(userDto.lastname());
 		user.setUsername(userDto.email());
 		user.setIdentification(userDto.identification());
 		user.setCellphone(userDto.cellphone());
