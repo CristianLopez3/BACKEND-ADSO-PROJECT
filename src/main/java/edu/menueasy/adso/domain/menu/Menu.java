@@ -7,12 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Table(name = "tb_menu")
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity(name = "Menu")
+@Table(name = "tb_menus")
 public class Menu {
 
   @Id
@@ -34,10 +35,8 @@ public class Menu {
   @Column(name = "imageName")
   private String imageName;
 
-  @JoinColumn(name = "category")
-  @ManyToOne()
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "category_id")
   private Category category;
-
-
 
 }

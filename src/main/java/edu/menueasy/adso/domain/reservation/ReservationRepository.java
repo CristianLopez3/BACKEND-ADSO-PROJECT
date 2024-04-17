@@ -10,9 +10,10 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> findByCheckedInTrue();
     List<Reservation> findByCheckedInFalse();
 
-
     @Query("""
-    SELECT MONTH(r.reservationDate), COUNT(r) FROM Reservation r WHERE YEAR(r.reservationDate) = YEAR(CURRENT_DATE()) GROUP BY MONTH(r.reservationDate)
+    SELECT MONTH(r.reservationDate), COUNT(r)
+    FROM Reservation r
+    WHERE YEAR(r.reservationDate) = YEAR(CURRENT_DATE()) GROUP BY MONTH(r.reservationDate)
     """)
     List<Object[]> getMonthlyReservationCounts();
 
