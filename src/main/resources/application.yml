@@ -1,27 +1,43 @@
 spring:
+
   application:
     name: menu-easy
+
   datasource:
-    url: jdbc:mysql://localhost:3306/db_project?createDatabaseIfNotExist=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/db_project #?createDatabaseIfNotExist=true&serverTimezone=UTC
     username: root
     password:
+
   jpa:
-    hibernate:
-      ddl-auto: update #create-drop
+
+
     properties:
       hibernate:
         format_sql: true
+
     show-sql: false
+
+  flyway:
+    enabled: true
+    location: classpath:db/migration
+
 server:
-  port: 8080
+  port: 8180
+
+  error:
+    include-stacktrace: never
+
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+
 project:
   image: images/
+
 logging:
   level:
     org:
       springframework:
         security: DEBUG
+
