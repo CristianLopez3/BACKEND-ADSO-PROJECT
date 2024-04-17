@@ -13,5 +13,7 @@ public interface UserService {
 	public void updateUser(UserDto userDto, Long id);
 	
 	public void deleteUser(Long id);
+
+	Long countUser();
 	
 }

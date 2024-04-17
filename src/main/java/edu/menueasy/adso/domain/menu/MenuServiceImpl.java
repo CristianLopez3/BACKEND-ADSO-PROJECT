@@ -83,6 +83,11 @@ public class MenuServiceImpl implements MenuService {
 				.map(MenuListDTO::new)
 				.collect(Collectors.toList());
 	}
+	
+	@Override
+	public Long countMenus() {
+		return menuRepository.count();
+	}
 
 	public MenuListDTO changeState(Integer id, DTOUpdateStateMenu dtoState) {
 		Menu menu =  menuRepository.findById(id).orElseThrow(() -> new RuntimeException("Can't find this reservation, try again"));

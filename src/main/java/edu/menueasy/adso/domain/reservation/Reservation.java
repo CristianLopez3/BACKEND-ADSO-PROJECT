@@ -7,11 +7,12 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "tb_booking")
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Entity(name = "Reservation")
+@Table(name = "tb_reservations")
 public class Reservation {
 
     @Id

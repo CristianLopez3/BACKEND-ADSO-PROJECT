@@ -50,6 +50,12 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    public Long countReservation(){
+        return reservationRepository.count();
+    }
+
+
+    @Override
     public List<Reservation> getReservationsBetweenDates(LocalDateTime start, LocalDateTime end) {
         return null;
     }

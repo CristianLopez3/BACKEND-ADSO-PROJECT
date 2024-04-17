@@ -6,6 +6,8 @@ import java.util.List;
 public interface ReservationService
 {
 
+    Long countReservation();
+
     List<Object[]>  getMonthlyReservationCounts();
 
 
