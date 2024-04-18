@@ -13,18 +13,22 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     long count();
 
-    List<Reservation> findByCheckedinIsTrue();
-    List<Reservation> findByCheckedinIsFalse();
+    List<Reservation> findByCheckedInIsTrue();
+    List<Reservation> findByCheckedInIsFalse();
 
     @Query("""
-    SELECT MONTH(r.reservationdate), COUNT(r)
+    SELECT MONTH(r.reservationDate), COUNT(r)
     FROM Reservation r
-    WHERE YEAR(r.reservationdate) = YEAR(CURRENT_DATE()) GROUP BY MONTH(r.reservationdate)
+    WHERE YEAR(r.reservationDate) = YEAR(CURRENT_DATE()) 
+    GROUP BY MONTH(r.reservationDate)
     """)
     List<Object[]> findMonthlyReservationCounts();
 
     @Query("""
-    SELECT COUNT(r) FROM Reservation r WHERE r.reservationdate BETWEEN :startDate AND :endDate
+    SELECT COUNT(r) 
+    FROM Reservation r
+    WHERE r.reservationDate 
+    BETWEEN :startDate AND :endDate
     """)
     Long countReservationsWithinDateRange(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
 

@@ -21,7 +21,7 @@ import java.util.List;
 public class MenuController {
 
 
-	private MenuServiceImpl menuService;
+	private final MenuServiceImpl menuService;
 
 	@Autowired
 	public MenuController(MenuServiceImpl menuService) {
@@ -38,7 +38,7 @@ public class MenuController {
 		return ResponseEntity.ok(menuService.findByCategory(id));
 	}
 
-	@PostMapping()
+	@PostMapping
 	@Transactional()
 	public ResponseEntity<MenuListDTO> createMenu(
 					@RequestParam("image") MultipartFile image,
@@ -77,9 +77,6 @@ public class MenuController {
 		long countMenus = menuService.countMenus();
 		return ResponseEntity.ok(menuService.countMenus());
 	}
-
-
-
 
 
 }

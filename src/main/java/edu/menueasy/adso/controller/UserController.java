@@ -24,7 +24,7 @@ import jakarta.transaction.Transactional;
 public class UserController {
 
 
-    public UserServiceImp userService;
+    public final UserServiceImp userService;
 
     @Autowired
     public UserController(UserServiceImp userService) {
