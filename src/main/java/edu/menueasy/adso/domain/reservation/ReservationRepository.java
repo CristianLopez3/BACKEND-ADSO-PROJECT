@@ -19,15 +19,15 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     @Query("""
     SELECT MONTH(r.reservationDate), COUNT(r)
     FROM Reservation r
-    WHERE YEAR(r.reservationDate) = YEAR(CURRENT_DATE()) 
+    WHERE YEAR(r.reservationDate) = YEAR(CURRENT_DATE())
     GROUP BY MONTH(r.reservationDate)
     """)
     List<Object[]> findMonthlyReservationCounts();
 
     @Query("""
-    SELECT COUNT(r) 
+    SELECT COUNT(r)
     FROM Reservation r
-    WHERE r.reservationDate 
+    WHERE r.reservationDate
     BETWEEN :startDate AND :endDate
     """)
     Long countReservationsWithinDateRange(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);

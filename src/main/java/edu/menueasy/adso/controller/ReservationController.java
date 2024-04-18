@@ -80,18 +80,20 @@ public class ReservationController {
         Map<String, Integer> monthlyReservations = new HashMap<>();
 
         for (Object[] result : monthlyCounts) {
-            Month month = (Month) result[0];
-            Long count = (Long) result[1];
+            Integer monthValue = (Integer) result[0]; // Obtiene el valor del mes como Long
+            Month month = Month.of(monthValue.intValue()); // Convierte el Long al mes correspondiente
+            Long count = (Long) result[1]; // Obtiene el recuento como Long
             monthlyReservations.put(month.toString(), count.intValue());
         }
 
-        // Fill in missing months with zero reservations
+        // Llena los meses faltantes con cero reservas
         for (Month month : Month.values()) {
             monthlyReservations.putIfAbsent(month.toString(), 0);
         }
 
         return monthlyReservations;
     }
+
 
     @Transactional
     @PostMapping("/between-dates")
