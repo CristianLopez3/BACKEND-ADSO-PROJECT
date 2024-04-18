@@ -26,7 +26,7 @@ INSERT INTO tb_reservations (name, phone_number, email, reservation_date, number
 ('Mateo', '999111222', 'mateo@example.com', '2024-11-02 09:45:00', 6, 'Desayuno de trabajo', 1),
 ('Valentina', '111222333', 'valentina@example.com', '2024-11-18 20:00:00', 2, 'Cena de negocios', 0),
 ('Gabriel', '222333444', 'gabriel@example.com', '2024-12-10 11:30:00', 3, 'Reunión de familiares', 1),
-('Camila', '333444555', 'camila@example.com', '2024-12-25 17:30:00', 4, 'Celebración de Navidad', 0);
+('Camila', '333444555', 'camila@example.com', '2024-12-25 17:30:00', 4, 'Celebración de Navidad', 0),
 ('Lucas', '444555666', 'lucas@example.com', '2024-01-08 18:00:00', 3, 'Cena familiar', 1),
 ('Emma', '777888999', 'emma@example.com', '2024-01-25 13:30:00', 5, 'Reunión de amigos', 0),
 ('Martín', '111222333', 'martin@example.com', '2024-02-12 20:45:00', 2, 'Cena romántica', 1),
