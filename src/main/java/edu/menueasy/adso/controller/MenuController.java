@@ -21,7 +21,7 @@ import java.util.List;
 public class MenuController {
 
 
-	private MenuServiceImpl menuService;
+	private final MenuServiceImpl menuService;
 
 	@Autowired
 	public MenuController(MenuServiceImpl menuService) {
@@ -77,9 +77,6 @@ public class MenuController {
 		long countMenus = menuService.countMenus();
 		return ResponseEntity.ok(menuService.countMenus());
 	}
-
-
-
 
 
 }

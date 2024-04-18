@@ -4,6 +4,7 @@ import edu.menueasy.adso.domain.reservation.ReservationCheckDto;
 import edu.menueasy.adso.domain.reservation.ReservationService;
 import edu.menueasy.adso.domain.reservation.ReservationServiceImpl;
 import edu.menueasy.adso.domain.reservation.Reservation;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ import java.util.Map;
 public class ReservationController {
 
 
-    private ReservationServiceImpl reservationService;
+    private final ReservationServiceImpl reservationService;
 
     @Autowired
     public ReservationController(ReservationServiceImpl reservationService) {
@@ -92,6 +93,7 @@ public class ReservationController {
         return monthlyReservations;
     }
 
+    @Transactional
     @PostMapping("/between-dates")
     public ResponseEntity<Long> getReservationsBetweenDates(@RequestParam(name = "start") String start,
                                                             @RequestParam(name = "end") String end) {
