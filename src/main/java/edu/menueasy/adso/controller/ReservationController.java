@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.format.TextStyle;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/v1/reservations")
@@ -75,28 +74,30 @@ public class ReservationController {
     }
 
     @GetMapping("/mes")
-    public Map<String, Integer> getMonthlyReservations() {
+    public ResponseEntity<Map<String, Integer>> getMonthlyReservations() {
         List<Object[]> monthlyCounts = reservationService.getMonthlyReservationCounts();
-        Map<String, Integer> monthlyReservations = new HashMap<>();
+        Map<String, Integer> monthlyReservations = new LinkedHashMap<>(); // Use LinkedHashMap to maintain insertion order
 
         for (Object[] result : monthlyCounts) {
             Integer monthValue = (Integer) result[0]; // Obtiene el valor del mes como Long
             Month month = Month.of(monthValue.intValue()); // Convierte el Long al mes correspondiente
             Long count = (Long) result[1]; // Obtiene el recuento como Long
-            monthlyReservations.put(month.toString(), count.intValue());
+            String monthName = month.getDisplayName(TextStyle.SHORT, Locale.US).toLowerCase(); // Get the month name in short form
+            monthlyReservations.put(monthName, count.intValue());
         }
 
         // Llena los meses faltantes con cero reservas
         for (Month month : Month.values()) {
-            monthlyReservations.putIfAbsent(month.toString(), 0);
+            String monthName = month.getDisplayName(TextStyle.SHORT, Locale.US).toLowerCase(); // Get the month name in short form
+            monthlyReservations.putIfAbsent(monthName, 0);
         }
 
-        return monthlyReservations;
+        return ResponseEntity.ok(monthlyReservations);
     }
 
 
-    @Transactional
-    @PostMapping("/between-dates")
+
+    @GetMapping("/between-dates")
     public ResponseEntity<Long> getReservationsBetweenDates(@RequestParam(name = "start") String start,
                                                             @RequestParam(name = "end") String end) {
         LocalDateTime startDate = LocalDateTime.parse(start);
