@@ -1,24 +1,18 @@
 package edu.menueasy.adso.controller;
 
-import edu.menueasy.adso.domain.reservation.ReservationCheckDto;
-import edu.menueasy.adso.domain.reservation.ReservationService;
-import edu.menueasy.adso.domain.reservation.ReservationServiceImpl;
-import edu.menueasy.adso.domain.reservation.Reservation;
+import edu.menueasy.adso.domain.reservation.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.format.TextStyle;
 import java.util.*;
 
 @RestController
 @RequestMapping("/api/v1/reservations")
 @CrossOrigin("*")
 public class ReservationController {
-
 
     private final ReservationServiceImpl reservationService;
 
@@ -27,11 +21,26 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
+    // Métodos para la creación y actualización de reservaciones
     @PostMapping
     public Reservation createReservation(@RequestBody Reservation reservation) {
         return reservationService.createReservation(reservation);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Reservation> updateReservation(@PathVariable Long id, @RequestBody Reservation reservation) {
+        if (!id.equals(reservation.getId())) {
+            throw new IllegalArgumentException("ID in the path and ID in the reservation object must be the same.");
+        }
+        return ResponseEntity.ok(reservationService.updateReservation(reservation));
+    }
+
+    @PatchMapping("/check/{id}")
+    public ResponseEntity<Reservation> checkReservation(@PathVariable("id") Long id, @RequestBody ReservationCheckDto reservation){
+        return ResponseEntity.ok(reservationService.checkReservation(id, reservation));
+    }
+
+    // Métodos para obtener reservaciones
     @GetMapping
     public List<Reservation> getAllReservations() {
         return reservationService.getAllReservations();
@@ -47,63 +56,51 @@ public class ReservationController {
         return reservationService.getUncheckedInReservations();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Reservation> updateReservation(@PathVariable Long id, @RequestBody Reservation reservation) {
-        if (!id.equals(reservation.getId())) {
-            throw new IllegalArgumentException("ID in the path and ID in the reservation object must be the same.");
-        }
-        return ResponseEntity.ok(reservationService.updateReservation(reservation));
-    }
-
-    @PatchMapping("/check/{id}")
-    public ResponseEntity<Reservation> checkReservation(@PathVariable("id") Long id, @RequestBody ReservationCheckDto reservation){
-
-        ResponseEntity<Reservation> ok = ResponseEntity.ok(reservationService.checkReservation(id, reservation));
-        return ok;
-    }
-
-    @PatchMapping("/patch")
-    public String patch(){
-        return "Greetings from patch";
-    }
-
+    // Métodos para obtener estadísticas de reservaciones
     @GetMapping("/count")
     public ResponseEntity<Long> countReservation(){
-        long countReservation = reservationService.countReservation();
         return ResponseEntity.ok(reservationService.countReservation());
+    }
+
+    @GetMapping("/unchecked-in-count")
+    public ResponseEntity<Long> getUncheckedInReservationCount(){
+        return ResponseEntity.ok(reservationService.getUncheckedInReservationCount());
     }
 
     @GetMapping("/mes")
     public ResponseEntity<Map<String, Integer>> getMonthlyReservations() {
-        List<Object[]> monthlyCounts = reservationService.getMonthlyReservationCounts();
-        Map<String, Integer> monthlyReservations = new LinkedHashMap<>(); // Use LinkedHashMap to maintain insertion order
-
-        for (Object[] result : monthlyCounts) {
-            Integer monthValue = (Integer) result[0]; // Obtiene el valor del mes como Long
-            Month month = Month.of(monthValue.intValue()); // Convierte el Long al mes correspondiente
-            Long count = (Long) result[1]; // Obtiene el recuento como Long
-            String monthName = month.getDisplayName(TextStyle.SHORT, Locale.US).toLowerCase(); // Get the month name in short form
-            monthlyReservations.put(monthName, count.intValue());
-        }
-
-        // Llena los meses faltantes con cero reservas
-        for (Month month : Month.values()) {
-            String monthName = month.getDisplayName(TextStyle.SHORT, Locale.US).toLowerCase(); // Get the month name in short form
-            monthlyReservations.putIfAbsent(monthName, 0);
-        }
-
-        return ResponseEntity.ok(monthlyReservations);
+        return ResponseEntity.ok(reservationService.getMonthlyReservationCounts());
     }
 
-
-
     @GetMapping("/between-dates")
-    public ResponseEntity<Long> getReservationsBetweenDates(@RequestParam(name = "start") String start,
-                                                            @RequestParam(name = "end") String end) {
+    public ResponseEntity<Long> getReservationsBetweenDates(@RequestParam(name = "start") String start, @RequestParam(name = "end") String end) {
         LocalDateTime startDate = LocalDateTime.parse(start);
         LocalDateTime endDate = LocalDateTime.parse(end);
-        Long reservations = reservationService.getReservationBetweenDate(startDate, endDate);
-        return ResponseEntity.ok().body(reservations);
+        return ResponseEntity.ok(reservationService.getReservationBetweenDate(startDate, endDate));
+    }
+
+    @GetMapping("/count-between-dates")
+    public ResponseEntity<List<ReservationCountDto>> getReservationsCountBetweenDates(@RequestParam(name = "start") String start, @RequestParam(name = "end") String end) {
+        LocalDateTime startDate = LocalDateTime.parse(start);
+        LocalDateTime endDate = LocalDateTime.parse(end);
+        return ResponseEntity.ok(reservationService.getReservationBetweenDates(startDate, endDate));
+    }
+
+    @GetMapping("/current-month")
+    public ResponseEntity<Long> getReservationsForCurrentMonth() {
+        return ResponseEntity.ok(reservationService.getReservationsForCurrentMonth());
+    }
+
+    @GetMapping("/previous-month")
+    public ResponseEntity<Long> getReservationsForPreviousMonth() {
+        return ResponseEntity.ok(reservationService.getReservationsForPreviousMonth());
+    }
+
+    @GetMapping("/compare-months")
+    public ResponseEntity<Map<String, Long>> getReservationsForGivenMonths(@RequestParam(name = "start") String start, @RequestParam(name = "end") String end) {
+        LocalDateTime startDate = LocalDateTime.parse(start);
+        LocalDateTime endDate = LocalDateTime.parse(end);
+        return ResponseEntity.ok(reservationService.getReservationsForGivenMonths(startDate, endDate));
     }
 
 

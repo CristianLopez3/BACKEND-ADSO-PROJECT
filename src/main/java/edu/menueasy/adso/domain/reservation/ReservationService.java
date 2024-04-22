@@ -2,6 +2,7 @@ package edu.menueasy.adso.domain.reservation;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public interface ReservationService {
 
@@ -19,9 +20,20 @@ public interface ReservationService {
 
     Long countReservation();
 
-    List<Object[]>  getMonthlyReservationCounts();
+    Map<String, Integer> getMonthlyReservationCounts();
 
     Long getReservationBetweenDate(LocalDateTime start, LocalDateTime end);
 
+    List<ReservationCountDto> getReservationBetweenDates(LocalDateTime start, LocalDateTime end);
+
+    Long getUncheckedInReservationCount();
+
+    Long getReservationsForCurrentMonth();
+
+    Long getReservationsForPreviousMonth();
+
+    Map<String, Long> getReservationsForGivenMonths(LocalDateTime start, LocalDateTime end);
+
+    Long getReservationsForSpecificMonth(LocalDateTime date);
 
 }
