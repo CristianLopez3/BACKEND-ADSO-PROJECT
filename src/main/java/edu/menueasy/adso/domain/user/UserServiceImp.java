@@ -7,6 +7,9 @@ import edu.menueasy.adso.domain.role.Role;
 import edu.menueasy.adso.infra.exceptions.user.UserNotFoundException;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,11 +26,12 @@ public class UserServiceImp implements UserService {
 	}
 
 	@Override
-	public List<UserDto> getUsers() {
-		return userRepository.findAll()
-				.stream()
+	public Page<UserDto> getAll(Pageable pageable) {
+		Page<User> userPage = userRepository.findAll(pageable);
+		List<UserDto> userDtos = userPage.stream()
 				.map(UserDto::new)
 				.collect(Collectors.toList());
+		return new PageImpl<>(userDtos, pageable, userPage.getTotalElements());
 	}
 
 	@Override
