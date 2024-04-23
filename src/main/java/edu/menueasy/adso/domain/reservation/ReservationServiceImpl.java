@@ -1,7 +1,9 @@
 package edu.menueasy.adso.domain.reservation;
 
-import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -28,6 +30,8 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepository.save(reservation);
     }
 
+
+
     @Override
     public Reservation updateReservation(Reservation reservation) {
         reservationValidator.validate(reservation);
@@ -42,10 +46,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     // Reservation retrieval methods
-    @Override
-    public List<Reservation> getAllReservations() {
-        return reservationRepository.findAll();
-    }
+
 
     @Override
     public List<Reservation> getCheckedInReservations() {
@@ -108,10 +109,18 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepository.countReservationsForSpecificMonth(start, end);
     }
 
+    @Override
+    public Page<Reservation> getReservations(Pageable pageable) {
+        return reservationRepository.findAll(pageable);
+    }
+
+
     // Helper methods
     private Reservation findReservationById(Long id) {
         return reservationRepository.findById(id).orElseThrow(() -> new RuntimeException("Can't find this reservation, try again"));
     }
+
+
 
     private Map<String, Integer> calculateMonthlyReservationCounts() {
         List<Object[]> monthlyCounts = reservationRepository.findMonthlyReservationCounts();

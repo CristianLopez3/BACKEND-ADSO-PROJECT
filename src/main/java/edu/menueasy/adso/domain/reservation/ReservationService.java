@@ -1,5 +1,8 @@
 package edu.menueasy.adso.domain.reservation;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +11,7 @@ public interface ReservationService {
 
     Reservation createReservation(Reservation reservation);
 
-    List<Reservation> getAllReservations();
+    Page<Reservation> getReservations(Pageable pageable);
 
     List<Reservation> getCheckedInReservations();
 
@@ -18,7 +21,6 @@ public interface ReservationService {
 
     Reservation checkReservation(Long id, ReservationCheckDto reservationDto);
 
-    Long countReservation();
 
     Map<String, Integer> getMonthlyReservationCounts();
 
@@ -26,7 +28,6 @@ public interface ReservationService {
 
     List<ReservationCountDto> getReservationBetweenDates(LocalDateTime start, LocalDateTime end);
 
-    Long getUncheckedInReservationCount();
 
     Long getReservationsForCurrentMonth();
 
@@ -35,5 +36,12 @@ public interface ReservationService {
     Map<String, Long> getReservationsForGivenMonths(LocalDateTime start, LocalDateTime end);
 
     Long getReservationsForSpecificMonth(LocalDateTime date);
+
+    Long countReservation();
+
+    Long getUncheckedInReservationCount();
+
+
+
 
 }
