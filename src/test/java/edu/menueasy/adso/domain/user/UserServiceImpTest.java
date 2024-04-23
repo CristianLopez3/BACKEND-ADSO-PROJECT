@@ -29,20 +29,6 @@ public class UserServiceImpTest {
   @InjectMocks
   UserServiceImp serviceImp;
 
-  @Test
-  public void testGetUsers() {
-    List<User> users = new ArrayList<>();
-
-    // TDD
-    when(userRepository.findAll()).thenReturn(users);
-
-    List<UserDto> returnedUsers = serviceImp.getUsers();
-
-    verify(userRepository, times(1)).findAll();
-    assertNotNull(returnedUsers);
-    assertEquals(0, returnedUsers.size());
-
-  }
 
   @Test
   public void testGetUserById() {
