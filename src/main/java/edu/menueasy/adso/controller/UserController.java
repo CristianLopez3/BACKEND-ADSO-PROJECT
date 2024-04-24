@@ -22,7 +22,6 @@ import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping("/api/v1/users")
-@CrossOrigin("*")
 public class UserController {
 
 

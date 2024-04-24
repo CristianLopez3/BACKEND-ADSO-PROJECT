@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -40,6 +41,7 @@ public class SecurityConfig  {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
          http
+                 .cors(Customizer.withDefaults()) // Cors configuration
                 .csrf(AbstractHttpConfigurer::disable)
                  .exceptionHandling(config -> config.authenticationEntryPoint(jwtAuthEntryPoint))
                 .authorizeHttpRequests(authorize -> authorize
@@ -48,7 +50,6 @@ public class SecurityConfig  {
                         .requestMatchers("/api/v1/file/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/menu/**").permitAll()
                         .requestMatchers("/api/v1/reservations/**").permitAll()
-
                         .anyRequest().authenticated()
                 )
                  .userDetailsService(customUserDetailsService)
@@ -73,50 +74,28 @@ public class SecurityConfig  {
         return new BCryptPasswordEncoder();
     }
 
-/*
+
+    // cors configuration
     @Bean
     public CorsConfigurationSource corsConfigurationSource(){
 
         CorsConfiguration configuration = new CorsConfiguration();
+
+        // configuring allowed source
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:5174"));
+
+        // Setting allowed methods
         configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE","PATCH", "HEAD","OPTIONS"));
-        configuration.setAllowedHeaders(List.of("Authorization", "content-type"));
+
+        //Setting Allowed Headers
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+
+        // Allow credentials
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
-*/
-/*
-    public void addCorsMappings(CorsRegistry registry) {
-
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:5174/")
-                .allowedMethods("GET","POST","PUT","DELETE","HEAD","OPTIONS")
-                .allowCredentials(true)
-                .allowedHeaders("*");
-    }
-
-     */
-
-    /*
-    @Bean
-
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5174/")
-                        .allowedMethods("*")
-                        .allowedHeaders("*");
-            }
-        };
-
-    } */
-
-
-
 
 
 }
