@@ -1,8 +1,11 @@
 package edu.menueasy.adso.controller;
 
 import edu.menueasy.adso.domain.reservation.*;
-import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,10 +43,11 @@ public class ReservationController {
         return ResponseEntity.ok(reservationService.checkReservation(id, reservation));
     }
 
+
     // Métodos para obtener reservaciones
-    @GetMapping
-    public List<Reservation> getAllReservations() {
-        return reservationService.getAllReservations();
+    @GetMapping("/count")
+    public ResponseEntity<Long> countReservation(){
+        return ResponseEntity.ok(reservationService.countReservation());
     }
 
     @GetMapping("/checked-in")
@@ -56,10 +60,9 @@ public class ReservationController {
         return reservationService.getUncheckedInReservations();
     }
 
-    // Métodos para obtener estadísticas de reservaciones
-    @GetMapping("/count")
-    public ResponseEntity<Long> countReservation(){
-        return ResponseEntity.ok(reservationService.countReservation());
+    @GetMapping
+    public ResponseEntity<Page<Reservation>> getReservations(@PageableDefault Pageable pagination) {
+        return ResponseEntity.ok().body( reservationService.getReservations(pagination));
     }
 
     @GetMapping("/unchecked-in-count")
@@ -102,6 +105,7 @@ public class ReservationController {
         LocalDateTime endDate = LocalDateTime.parse(end);
         return ResponseEntity.ok(reservationService.getReservationsForGivenMonths(startDate, endDate));
     }
+
 
 
 

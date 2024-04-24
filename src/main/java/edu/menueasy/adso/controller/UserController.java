@@ -2,8 +2,10 @@ package edu.menueasy.adso.controller;
 
 import java.util.List;
 
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,8 +47,8 @@ public class UserController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<UserDto>> getAll() {
-        return ResponseEntity.ok(userService.getUsers());
+    public ResponseEntity<Page<UserDto>> getAll(@PageableDefault Pageable pageable) {
+        return ResponseEntity.ok(userService.getAll(pageable));
     }
 
     @GetMapping("/{id}")
@@ -78,5 +80,7 @@ public class UserController {
         long countUser = userService.countUser();
         return ResponseEntity.ok(userService.countUser());
     }
+
+
 
 }

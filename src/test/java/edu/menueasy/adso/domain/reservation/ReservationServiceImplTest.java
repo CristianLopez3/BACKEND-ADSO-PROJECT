@@ -7,6 +7,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +30,9 @@ class ReservationServiceImplTest {
   @Mock
   private ReservationRepository reservationRepository;
 
+  @Mock
+  private Pageable pagination;
+
   @InjectMocks
   private ReservationServiceImpl reservationService;
 
@@ -46,7 +51,7 @@ class ReservationServiceImplTest {
     Reservation reservation2 = new Reservation();
     List<Reservation> reservations = Arrays.asList(reservation1, reservation2);
     when(reservationRepository.findAll()).thenReturn(reservations);
-    List<Reservation> result = reservationService.getAllReservations();
+    Page<Reservation> result = reservationService.getReservations(pagination);
     verify(reservationRepository, times(1)).findAll();
     assertEquals(reservations, result);
   }
