@@ -32,7 +32,7 @@ public class MenuController {
 	}
 	
 	@GetMapping()
-	public ResponseEntity<Page<MenuListDTO>> getMenus(@PageableDefault(size = 10)Pageable pageable){
+	public ResponseEntity<Page<MenuListDTO>> getMenus(@PageableDefault Pageable pageable){
 		return ResponseEntity.ok(menuService.getAll(pageable));
 	}
 

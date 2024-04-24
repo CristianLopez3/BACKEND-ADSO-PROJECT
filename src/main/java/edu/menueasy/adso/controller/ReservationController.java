@@ -61,7 +61,7 @@ public class ReservationController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Reservation>> getReservations(@PageableDefault(size = 20) Pageable pagination) {
+    public ResponseEntity<Page<Reservation>> getReservations(@PageableDefault Pageable pagination) {
         return ResponseEntity.ok().body( reservationService.getReservations(pagination));
     }
 
