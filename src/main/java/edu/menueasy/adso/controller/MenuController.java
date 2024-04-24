@@ -20,7 +20,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/menus")
-@CrossOrigin("*")
 public class MenuController {
 
 

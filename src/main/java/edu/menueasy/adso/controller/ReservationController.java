@@ -14,7 +14,6 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/v1/reservations")
-@CrossOrigin("*")
 public class ReservationController {
 
     private final ReservationServiceImpl reservationService;
