@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  app:
+    image: adso
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/db_project
+      - SPRING_DATASOURCE_USERNAME=prod
+      - SPRING_DATASOURCE_PASSWORD=12345678
+      - SPRING_PROFILES_ACTIVE=prod
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=12345678
+      - MYSQL_DATABASE=db_project
+      - MYSQL_USER=prod
+      - MYSQL_PASSWORD=12345678
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
