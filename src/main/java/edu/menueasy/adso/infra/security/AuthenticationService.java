@@ -64,9 +64,7 @@ public class AuthenticationService {
         );
 
         User user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        System.out.println("0000000000000000000000000000000000000000000000");
-        System.out.println(user);
+                .orElseThrow(() -> new UsernameNotFoundException("User not found security conflict"));
         String token = jwtService.generateToken(user);
 
         Date expiresIn = jwtService.extractClaims(token, Claims::getExpiration);

@@ -61,10 +61,11 @@ public class UserServiceImp implements UserService {
 				.orElseThrow(() -> new UserNotFoundException("User not found with ID: " + id));
 		user.setName(userDto.name());
 		user.setLastname(userDto.lastname());
-		user.setUsername(userDto.email());
+//		user.setUsername(userDto.email());
+//		user.setPassword(encoder.encode(userDto.password()));
+//		user.setRole(Role.ADMIN);
 		user.setIdentification(userDto.identification());
 		user.setCellphone(userDto.cellphone());
-		user.setRole(Role.ADMIN);
 		user.setId(id);
 		userRepository.save(user);
 	}

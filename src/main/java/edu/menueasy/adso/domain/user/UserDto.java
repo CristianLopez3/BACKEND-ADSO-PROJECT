@@ -7,9 +7,9 @@ public record UserDto(
 		Long id,
 		String name,
 		String lastname,
-		@NotNull @Email String email,
+		@Email String email,
 		String identification,
-		@NotNull String password, 
+		String password,
 		Long cellphone,
 		String role) {
 	public UserDto(User user) {

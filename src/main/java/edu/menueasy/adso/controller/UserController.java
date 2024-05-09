@@ -1,13 +1,11 @@
 package edu.menueasy.adso.controller;
 
-import java.util.List;
-
+import edu.menueasy.adso.dto.AuthenticationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -65,18 +63,16 @@ public class UserController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<UserDto> updateUser(
+    public ResponseEntity<String> updateUser(
         @RequestBody UserDto userDto, 
         @PathVariable(name = "id") Long id
     ){
         userService.updateUser(userDto, id);
-        return ResponseEntity.ok(userDto);
+        return ResponseEntity.ok("User updated with success!");
     }
 
     @GetMapping("/count")
     public ResponseEntity<Long> countUser(){
-
-        long countUser = userService.countUser();
         return ResponseEntity.ok(userService.countUser());
     }
 

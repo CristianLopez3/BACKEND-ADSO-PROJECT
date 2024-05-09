@@ -30,6 +30,7 @@ public class SecurityConfig  {
     private final UserDetailsServiceImpl customUserDetailsService;
     private final JWTAuthenticationFilter jwtAuthenticationFilter;
     private final JwtAuthEntryPoint jwtAuthEntryPoint;
+
     public SecurityConfig(UserDetailsServiceImpl customUserDetailsService,
                           JWTAuthenticationFilter jwtAuthenticationFilter,
                           JwtAuthEntryPoint jwtAuthEntryPoint) {
@@ -50,7 +51,7 @@ public class SecurityConfig  {
                         .requestMatchers("/api/v1/file/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/menus/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/category/**").permitAll()
-                        .requestMatchers("/api/v1/reservations/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/v1/reservations/**").permitAll()
                         .anyRequest().authenticated()
                 )
                  .userDetailsService(customUserDetailsService)
@@ -58,7 +59,6 @@ public class SecurityConfig  {
                          .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                  )
                  .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
 
          return http.build();
     }
@@ -76,24 +76,17 @@ public class SecurityConfig  {
     }
 
 
-    // cors configuration
     @Bean
     public CorsConfigurationSource corsConfigurationSource(){
-
         CorsConfiguration configuration = new CorsConfiguration();
-
         // configuring allowed source
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:5174"));
-
         // Setting allowed methods
         configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE","PATCH", "HEAD","OPTIONS"));
-
         //Setting Allowed Headers
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
-
         // Allow credentials
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }

@@ -2,6 +2,7 @@ package edu.menueasy.adso.controller;
 
 import edu.menueasy.adso.domain.reservation.*;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,13 +24,14 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    // Métodos para la creación y actualización de reservaciones
     @PostMapping
+    @Transactional
     public Reservation createReservation(@RequestBody Reservation reservation) {
         return reservationService.createReservation(reservation);
     }
 
     @PutMapping("/{id}")
+    @Transactional
     public ResponseEntity<Reservation> updateReservation(@PathVariable Long id, @RequestBody Reservation reservation) {
         if (!id.equals(reservation.getId())) {
             throw new IllegalArgumentException("ID in the path and ID in the reservation object must be the same.");
@@ -38,12 +40,12 @@ public class ReservationController {
     }
 
     @PatchMapping("/check/{id}")
+    @Transactional
     public ResponseEntity<Reservation> checkReservation(@PathVariable("id") Long id, @RequestBody ReservationCheckDto reservation){
         return ResponseEntity.ok(reservationService.checkReservation(id, reservation));
     }
 
 
-    // Métodos para obtener reservaciones
     @GetMapping("/count")
     public ResponseEntity<Long> countReservation(){
         return ResponseEntity.ok(reservationService.countReservation());
@@ -104,9 +106,6 @@ public class ReservationController {
         LocalDateTime endDate = LocalDateTime.parse(end);
         return ResponseEntity.ok(reservationService.getReservationsForGivenMonths(startDate, endDate));
     }
-
-
-
 
 
 }

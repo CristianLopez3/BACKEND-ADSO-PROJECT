@@ -3,7 +3,6 @@ package edu.menueasy.adso.controller;
 import edu.menueasy.adso.domain.user.User;
 import edu.menueasy.adso.domain.user.UserDto;
 import edu.menueasy.adso.dto.AuthenticationResponse;
-import edu.menueasy.adso.dto.LoginDto;
 import edu.menueasy.adso.infra.security.AuthenticationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
