@@ -49,7 +49,7 @@ public class UserServiceImp implements UserService {
 				.password(encoder.encode(userDto.password()))
 				.cellphone(userDto.cellphone())
 				.identification(userDto.identification())
-				.role(Role.ADMIN)
+				.role(userDto.role())
 				.build();
 		userRepository.save(user);
 	}
@@ -62,7 +62,7 @@ public class UserServiceImp implements UserService {
 		user.setLastname(userDto.lastname());
 //		user.setUsername(userDto.email());
 //		user.setPassword(encoder.encode(userDto.password()));
-//		user.setRole(Role.ADMIN);
+//		user.setRole(userDto.role());
 		user.setIdentification(userDto.identification());
 		user.setCellphone(userDto.cellphone());
 		user.setId(id);

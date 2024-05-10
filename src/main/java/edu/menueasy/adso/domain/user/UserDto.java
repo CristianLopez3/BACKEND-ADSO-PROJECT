@@ -11,7 +11,7 @@ public record UserDto(
 		String identification,
 		String password,
 		Long cellphone,
-		String role) {
+		Role role) {
 	public UserDto(User user) {
 		this(
 				user.getId(),
@@ -21,7 +21,7 @@ public record UserDto(
 				user.getIdentification(),
 				user.getPassword(),
 				user.getCellphone(),
-				user.getRole().toString()
+				user.getRole()
 		);
 	}
 }
