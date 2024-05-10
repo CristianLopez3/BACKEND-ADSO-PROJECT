@@ -57,17 +57,23 @@ class ReservationServiceImplTest {
     assertEquals(reservations, result);
   }
 
+
   @Test
-  public void updateReservation(){
-    Reservation reservation1 = new Reservation();
-    reservation1.setName("Example");
+  public void testUpdateReservation_ValidReservation() {
+    // Arrange
+    Long reservationId = 1L;
+    Reservation reservation = new Reservation();
+    reservation.setId(reservationId);
 
-    given(reservationRepository.save(any(Reservation.class))).willReturn(reservation1);
+    when(reservationRepository.findById(reservationId)).thenReturn(Optional.of(reservation));
+    doNothing().when(reservationValidator).validate(reservation);
+    when(reservationRepository.save(reservation)).thenReturn(reservation);
 
-    Reservation updatedReservation = reservationService.updateReservation(new Reservation());
+    // Act
+    Reservation updatedReservation = reservationService.updateReservation(reservation);
 
-    then(reservationRepository).should().save(any(Reservation.class));
-    assertThat(reservation1.getName()).isEqualTo(updatedReservation.getName());
+    // Assert
+    assertEquals(reservation, updatedReservation);
   }
 
   @Test
