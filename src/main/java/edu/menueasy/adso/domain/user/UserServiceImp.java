@@ -3,7 +3,6 @@ package edu.menueasy.adso.domain.user;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import edu.menueasy.adso.domain.role.Role;
 import edu.menueasy.adso.infra.exceptions.user.UserNotFoundException;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package edu.menueasy.adso.infra.security;
 
-import edu.menueasy.adso.domain.role.Role;
+import edu.menueasy.adso.domain.user.Role;
 import edu.menueasy.adso.domain.user.User;
 import edu.menueasy.adso.domain.user.UserDto;
 import edu.menueasy.adso.domain.user.UserRepository;

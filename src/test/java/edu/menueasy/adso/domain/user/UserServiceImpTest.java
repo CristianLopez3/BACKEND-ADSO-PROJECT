@@ -1,6 +1,5 @@
 package edu.menueasy.adso.domain.user;
 
-import edu.menueasy.adso.domain.role.Role;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
