@@ -39,6 +39,14 @@ public class ReservationController {
         return ResponseEntity.ok(reservationService.updateReservation(reservation));
     }
 
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<String> deleteReservation(@PathVariable Long id) {
+        reservationService.deleteReservation(id);
+        return ResponseEntity.ok("Reservation deleted with success!");
+    }
+
     @PatchMapping("/check/{id}")
     @Transactional
     public ResponseEntity<Reservation> checkReservation(@PathVariable("id") Long id, @RequestBody ReservationCheckDto reservation){
