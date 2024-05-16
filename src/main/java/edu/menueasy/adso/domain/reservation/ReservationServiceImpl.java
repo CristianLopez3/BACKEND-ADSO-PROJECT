@@ -34,6 +34,9 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public Reservation updateReservation(Reservation reservation) {
+        if(reservation.getId() == null || reservationRepository.findById(reservation.getId()).isEmpty()){
+            throw new IllegalArgumentException("Reservation ID is required for updating reservation");
+        }
         reservationValidator.validate(reservation);
         return reservationRepository.save(reservation);
     }
@@ -112,6 +115,11 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public Page<Reservation> getReservations(Pageable pageable) {
         return reservationRepository.findAll(pageable);
+    }
+
+    @Override
+    public Long contarReservasPorEstado(boolean checkedIn) {
+        return reservationRepository.countReservationsByCheckedIn(checkedIn);
     }
 
 

@@ -1,6 +1,5 @@
 package edu.menueasy.adso.domain.user;
 
-import edu.menueasy.adso.domain.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;

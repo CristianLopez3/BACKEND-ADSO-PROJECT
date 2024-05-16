@@ -3,7 +3,6 @@ package edu.menueasy.adso.domain.user;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import edu.menueasy.adso.domain.role.Role;
 import edu.menueasy.adso.infra.exceptions.user.UserNotFoundException;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +49,7 @@ public class UserServiceImp implements UserService {
 				.password(encoder.encode(userDto.password()))
 				.cellphone(userDto.cellphone())
 				.identification(userDto.identification())
-				.role(Role.ADMIN)
+				.role(userDto.role())
 				.build();
 		userRepository.save(user);
 	}
@@ -61,10 +60,11 @@ public class UserServiceImp implements UserService {
 				.orElseThrow(() -> new UserNotFoundException("User not found with ID: " + id));
 		user.setName(userDto.name());
 		user.setLastname(userDto.lastname());
-		user.setUsername(userDto.email());
+//		user.setUsername(userDto.email());
+//		user.setPassword(encoder.encode(userDto.password()));
+//		user.setRole(userDto.role());
 		user.setIdentification(userDto.identification());
 		user.setCellphone(userDto.cellphone());
-		user.setRole(Role.ADMIN);
 		user.setId(id);
 		userRepository.save(user);
 	}

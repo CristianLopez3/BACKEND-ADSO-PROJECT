@@ -7,11 +7,11 @@ public record UserDto(
 		Long id,
 		String name,
 		String lastname,
-		@NotNull @Email String email,
+		@Email String email,
 		String identification,
-		@NotNull String password, 
+		String password,
 		Long cellphone,
-		String role) {
+		Role role) {
 	public UserDto(User user) {
 		this(
 				user.getId(),
@@ -21,7 +21,7 @@ public record UserDto(
 				user.getIdentification(),
 				user.getPassword(),
 				user.getCellphone(),
-				user.getRole().toString()
+				user.getRole()
 		);
 	}
 }

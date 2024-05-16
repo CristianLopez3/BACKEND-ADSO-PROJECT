@@ -21,13 +21,11 @@ public interface ReservationService {
 
     Reservation checkReservation(Long id, ReservationCheckDto reservationDto);
 
-
     Map<String, Integer> getMonthlyReservationCounts();
 
     Long getReservationBetweenDate(LocalDateTime start, LocalDateTime end);
 
     List<ReservationCountDto> getReservationBetweenDates(LocalDateTime start, LocalDateTime end);
-
 
     Long getReservationsForCurrentMonth();
 
@@ -42,6 +40,5 @@ public interface ReservationService {
     Long getUncheckedInReservationCount();
 
 
-
-
+    Long contarReservasPorEstado(boolean checkedIn);
 }

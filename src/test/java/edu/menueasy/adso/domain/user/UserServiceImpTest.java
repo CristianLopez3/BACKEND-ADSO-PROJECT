@@ -1,6 +1,5 @@
 package edu.menueasy.adso.domain.user;
 
-import edu.menueasy.adso.domain.role.Role;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -15,8 +14,6 @@ import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
