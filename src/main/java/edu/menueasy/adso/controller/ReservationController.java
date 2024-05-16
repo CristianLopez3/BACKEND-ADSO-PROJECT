@@ -108,4 +108,10 @@ public class ReservationController {
     }
 
 
+    @GetMapping("/conutcheck")
+    public Long contarReservasPorEstado(@RequestParam(value = "checkedIn") boolean checkedIn) {
+        return reservationService.contarReservasPorEstado(checkedIn);
+    }
+
+
 }

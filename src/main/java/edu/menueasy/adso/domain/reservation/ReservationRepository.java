@@ -46,7 +46,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             WHERE r.reservationDate
             BETWEEN :start AND :end
             GROUP BY r.reservationDate
-             """)
+            """)
     List<ReservationCountDto> findReservationsCountBetweenDates(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 
     Long countByCheckedInFalse();
@@ -59,4 +59,12 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
         """)
     Long countReservationsForSpecificMonth(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
 
+    @Query("""
+        SELECT COUNT(r)
+        FROM Reservation r
+        WHERE r.checkedIn = :checkedIn
+        """)
+    Long countReservationsByCheckedIn(@Param("checkedIn") boolean checkedIn);
 }
+
+

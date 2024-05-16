@@ -117,6 +117,11 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepository.findAll(pageable);
     }
 
+    @Override
+    public Long contarReservasPorEstado(boolean checkedIn) {
+        return reservationRepository.countReservationsByCheckedIn(checkedIn);
+    }
+
 
     // Helper methods
     private Reservation findReservationById(Long id) {

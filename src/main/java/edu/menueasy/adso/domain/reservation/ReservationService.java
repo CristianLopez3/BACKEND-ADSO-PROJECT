@@ -40,7 +40,5 @@ public interface ReservationService {
     Long getUncheckedInReservationCount();
 
 
-
-
-
+    Long contarReservasPorEstado(boolean checkedIn);
 }
