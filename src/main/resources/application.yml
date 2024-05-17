@@ -2,9 +2,9 @@ spring:
   application:
     name: menu-easy
   datasource:
-    url: jdbc:mysql://localhost:3306/db_project?createDatabaseIfNotExist=true&serverTimezone=UTC
-    username: ${DB_USER}
-    password:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USER}
+    password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     properties:
       hibernate:
@@ -25,3 +25,4 @@ logging:
     org:
       springframework:
         security: DEBUG
+
