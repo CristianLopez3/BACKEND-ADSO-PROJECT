@@ -125,7 +125,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public Page<Reservation> getReservations(Pageable pageable) {
-        return reservationRepository.findAll(pageable);
+        return reservationRepository.findAllByOrderByReservationDateDescCheckedInAsc(pageable);
     }
 
 
