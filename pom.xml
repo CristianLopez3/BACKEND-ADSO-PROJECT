@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>edu.menueasy</groupId>
-    <artifactId>adso</artifactId>
+    <artifactId>app_menuEasy</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>adso</name>
-    <description>adso</description>
+    <name>app_menuEasy</name>
+    <description>Demo Project adso</description>
     <properties>
         <java.version>17</java.version>
         <jwt.version>0.12.5</jwt.version>
@@ -70,14 +70,15 @@
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
+            <version>8.0.33</version>
             <scope>runtime</scope>
         </dependency>
 
-         <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <optional>true</optional>
-    </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
