@@ -60,11 +60,14 @@ class ReservationServiceImplTest {
   @Test
   public void updateReservation(){
     Reservation reservation1 = new Reservation();
+    reservation1.setId(1L);
     reservation1.setName("Example");
 
+    given(reservationRepository.findById(1L)).willReturn(Optional.of(reservation1));
     given(reservationRepository.save(any(Reservation.class))).willReturn(reservation1);
 
-    Reservation updatedReservation = reservationService.updateReservation(new Reservation());
+    Reservation updatedReservation = reservationService
+            .updateReservation(new Reservation().builder().id(1L).name("Example").build());
 
     then(reservationRepository).should().save(any(Reservation.class));
     assertThat(reservation1.getName()).isEqualTo(updatedReservation.getName());
