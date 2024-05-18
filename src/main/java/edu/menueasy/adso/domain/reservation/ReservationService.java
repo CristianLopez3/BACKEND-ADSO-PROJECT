@@ -41,8 +41,4 @@ public interface ReservationService {
 
     Long getUncheckedInReservationCount();
 
-
-
-
-
 }
