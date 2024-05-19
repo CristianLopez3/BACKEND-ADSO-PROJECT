@@ -1,8 +1,11 @@
 package edu.menueasy.adso.domain.event;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.*;
-
 import javax.lang.model.element.Name;
 
 @Data
@@ -19,7 +22,7 @@ public class Event {
     @Column ( name = "title")
     private String title;
 
-    @Column( name = "description", length = 1000)
+    @Column( name = "description", length = 100)
     private String description;
 
     @Column( name = "discount")
@@ -28,4 +31,6 @@ public class Event {
     @Column (name = "url")
     private String url;
 
+
 }
+
