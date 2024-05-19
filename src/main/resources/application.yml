@@ -2,19 +2,16 @@ spring:
   application:
     name: menu-easy
   datasource:
-    url: jdbc:mysql://localhost:3306/db_project?createDatabaseIfNotExist=true&serverTimezone=UTC
-    username: root
-    password: 12345678
-#    url: ${SPRING_DATASOURCE_URL}
-#    username: ${SPRING_DATASOURCE_USER}
-#    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USER}
+    password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     properties:
       hibernate:
         format_sql: true
     show-sql: false
 server:
-  port: 8081
+  port: 8080
   error:
     include-stacktrace: never
   servlet:

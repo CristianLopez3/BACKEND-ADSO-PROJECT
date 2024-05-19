@@ -10,5 +10,5 @@ VALUES (
         promotions and surprises for our diners. Don\'t miss out! Book your table now and
         join us to celebrate Labor Day in style at MenuEASY.",
     30,
-    'unknown'
+    '1093007c-fdd9-4edf-bc04-707395e3bc57.jpeg'
 );

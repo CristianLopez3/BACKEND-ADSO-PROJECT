@@ -34,13 +34,14 @@ public class EventServiceImpl implements EventService {
     public Event updateEvent(Integer id, Event eventDetails, MultipartFile image) {
         Event existingEvent = eventRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("Event with id " + id + " not found")
-        );
+        );;
         if (image != null) {
             String imageUrl = uploadImage(image);
             existingEvent.setUrl(imageUrl);
         }
         existingEvent.setTitle(eventDetails.getTitle());
         existingEvent.setDescription(eventDetails.getDescription());
+        existingEvent.setDiscount(eventDetails.getDiscount());
 
         return eventRepository.save(existingEvent);
     }

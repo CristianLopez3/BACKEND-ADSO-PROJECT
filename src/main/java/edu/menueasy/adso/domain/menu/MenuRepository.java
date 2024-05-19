@@ -9,8 +9,6 @@ import java.util.List;
 @Repository
 public interface MenuRepository extends JpaRepository<Menu, Integer>{
 
-  @NotNull Page<Menu> findAll(Pageable pageable);
-
   List<Menu> findByCategoryId(Integer idCategory);
 
 }

@@ -13,9 +13,6 @@ import edu.menueasy.adso.infra.exceptions.menu.InvalidMenuException;
 import edu.menueasy.adso.infra.exceptions.menu.MenuSaveException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,12 +42,9 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	public Page<MenuListDTO> getAll(Pageable pageable) {
-		Page<Menu> menuPage = menuRepository.findAll(pageable);
-		List<MenuListDTO> menuListDTOs = menuPage.stream()
-				.map(MenuListDTO::new)
-				.collect(Collectors.toList());
-		return new PageImpl<>(menuListDTOs, pageable, menuPage.getTotalElements());
+	public List<Menu> getAll() {
+		return menuRepository.findAll();
+
 	}
 	@Transactional
 	@Override

@@ -52,6 +52,7 @@ public class SecurityConfig  {
                         .requestMatchers(HttpMethod.GET, "/api/v1/menus/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/category/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/v1/reservations/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/v1/events/**").permitAll()
                         .anyRequest().authenticated()
                 )
                  .userDetailsService(customUserDetailsService)

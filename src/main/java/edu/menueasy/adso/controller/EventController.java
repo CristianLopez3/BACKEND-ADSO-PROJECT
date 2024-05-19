@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.menueasy.adso.domain.event.Event;
 import edu.menueasy.adso.domain.event.EventService;
+import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class EventController {
     @PutMapping("/{id}")
     public ResponseEntity<Event> updateEvent(
             @PathVariable Integer id,
-            @RequestParam("image") MultipartFile image,
+            @RequestParam("image") @Nullable MultipartFile image,
             @RequestPart("event") String eventStr
     ) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
