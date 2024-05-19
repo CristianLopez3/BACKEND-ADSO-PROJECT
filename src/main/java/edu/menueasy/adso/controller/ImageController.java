@@ -35,8 +35,8 @@ public class ImageController {
 
     @PostMapping("/upload")
     public ResponseEntity<ImageResponse> fileUpload(
-            @RequestParam("image")MultipartFile image
-    ){
+            @RequestParam("image") MultipartFile image
+    ) {
         String fileName = null;
         try {
             fileName = filesService.uploadImage(path, image);
@@ -57,7 +57,7 @@ public class ImageController {
     }
 
     @GetMapping("/{name}")
-    public ResponseEntity<Resource> getImage(@PathVariable String name)throws IOException{
+    public ResponseEntity<Resource> getImage(@PathVariable String name) throws IOException {
         Path imagePath = Paths.get(path).resolve(name);
         Resource resource = new UrlResource(imagePath.toUri());
         return ResponseEntity.ok()

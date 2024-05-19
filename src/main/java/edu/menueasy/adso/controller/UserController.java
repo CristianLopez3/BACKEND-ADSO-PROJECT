@@ -65,7 +65,7 @@ public class UserController {
     @Transactional
     public ResponseEntity<String> updateUser(
         @RequestBody UserDto userDto, 
-        @PathVariable(name = "id") Long id
+        @PathVariable Long id
     ){
         userService.updateUser(userDto, id);
         return ResponseEntity.ok("User updated with success!");

@@ -1,10 +1,15 @@
 package edu.menueasy.adso.controller;
 
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.menueasy.adso.domain.event.Event;
 import edu.menueasy.adso.domain.event.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 
 @RestController
 @RequestMapping("/api/v1/events")
@@ -24,15 +29,15 @@ public class EventController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Event> updateEvent(@PathVariable Integer id, @RequestBody Event eventDetails) {
-        Event existingEvent = eventService.findEventById(id);
-        if (existingEvent == null) {
-            return ResponseEntity.notFound().build();
-        }
-        existingEvent.setTitle(eventDetails.getTitle());
-        existingEvent.setDescription(eventDetails.getDescription());
-        existingEvent.setUrl(eventDetails.getUrl());
-        Event updatedEvent = eventService.updateEvent(existingEvent);
+    public ResponseEntity<Event> updateEvent(
+            @PathVariable Integer id,
+            @RequestParam("image") MultipartFile image,
+            @RequestPart("event") String eventStr
+    ) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Event eventDetails = objectMapper.readValue(eventStr, Event.class);
+        Event updatedEvent = eventService.updateEvent(id, eventDetails, image);
         return ResponseEntity.ok(updatedEvent);
     }
+
 }

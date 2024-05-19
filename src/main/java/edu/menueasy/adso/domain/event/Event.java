@@ -5,16 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+import lombok.*;
 import javax.lang.model.element.Name;
 
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "Event")
-@Table(name = "tb_event")
-
+@Table(name = "tb_events")
 public class Event {
 
     @Id
@@ -33,4 +31,6 @@ public class Event {
     @Column (name = "url")
     private String url;
 
+
 }
+
