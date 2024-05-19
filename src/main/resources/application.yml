@@ -20,6 +20,8 @@ server:
       max-request-size: 10MB
 project:
   image: images/
+  secretKey: ${SECRET_KEY}
+  frontendPath: ${FRONTEND_PATH}
 logging:
   level:
     org:

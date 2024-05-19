@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import edu.menueasy.adso.domain.menu.image.ImageServiceImpl;
 import edu.menueasy.adso.infra.exceptions.menu.ImageUploadException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
@@ -34,7 +32,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event updateEvent(Integer id, Event eventDetails, MultipartFile image) {
+    public Event updateEvent(Integer id, MultipartFile image) {
         Event existingEvent = eventRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("Event with id " + id + " not found")
         );;
@@ -42,6 +40,14 @@ public class EventServiceImpl implements EventService {
             String imageUrl = uploadImage(image);
             existingEvent.setUrl(imageUrl);
         }
+        return eventRepository.save(existingEvent);
+    }
+
+    @Override
+    public Event updateEvent(Integer id, Event eventDetails) {
+        Event existingEvent = eventRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("Event with id " + id + " not found")
+        );;
         existingEvent.setTitle(eventDetails.getTitle());
         existingEvent.setDescription(eventDetails.getDescription());
         existingEvent.setDiscount(eventDetails.getDiscount());

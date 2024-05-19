@@ -1,5 +1,6 @@
 package edu.menueasy.adso.infra.security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -27,6 +28,8 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig  {
 
+    @Value("${project.frontendPath}")
+    private String FRONTEND_PATH;
     private final UserDetailsServiceImpl customUserDetailsService;
     private final JWTAuthenticationFilter jwtAuthenticationFilter;
     private final JwtAuthEntryPoint jwtAuthEntryPoint;
@@ -81,7 +84,7 @@ public class SecurityConfig  {
     public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
         // configuring allowed source
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5174",
+        configuration.setAllowedOrigins(Arrays.asList(FRONTEND_PATH,
                 "http://192.168.20.25:5174/"));
         // Setting allowed methods
         configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE","PATCH", "HEAD","OPTIONS"));

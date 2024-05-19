@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.menueasy.adso.domain.event.Event;
 import edu.menueasy.adso.domain.event.EventService;
 import jakarta.annotation.Nullable;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,14 +31,18 @@ public class EventController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Event> updateEvent(
-            @PathVariable Integer id,
-            @RequestParam("image") @Nullable MultipartFile image,
-            @RequestPart("event") String eventStr
-    ) throws JsonProcessingException {
+    @Transactional
+    public ResponseEntity<Event> updateEvent(@PathVariable Integer id, @RequestPart("event") String eventStr) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         Event eventDetails = objectMapper.readValue(eventStr, Event.class);
-        Event updatedEvent = eventService.updateEvent(id, eventDetails, image);
+        Event updatedEvent = eventService.updateEvent(id, eventDetails);
+        return ResponseEntity.ok(updatedEvent);
+    }
+
+    @PutMapping("/{id}/picture")
+    @Transactional
+    public ResponseEntity<Event> updateEventImage(@PathVariable Integer id, @RequestParam("image") MultipartFile image) {
+        Event updatedEvent = eventService.updateEvent(id, image);
         return ResponseEntity.ok(updatedEvent);
     }
 
