@@ -4,4 +4,3 @@ COPY ${JAR_FILE} app_menuEasy.jar
 COPY ./images /app/images
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app_menuEasy.jar"]
-
