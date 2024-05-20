@@ -19,7 +19,7 @@ server:
       max-file-size: 10MB
       max-request-size: 10MB
 project:
-  image: images/
+  image: /app/images
   secretKey: ${SECRET_KEY}
   frontendPath: ${FRONTEND_PATH}
 logging:
