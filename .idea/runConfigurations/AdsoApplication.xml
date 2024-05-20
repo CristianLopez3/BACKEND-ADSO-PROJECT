@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="AdsoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
     <envs>
-      <env name="FRONTEND_PATH" value="http://localhost:5174/" />
-      <env name="SECRET_KEY" value="&quot;9d84d7b6e5c541f203c51eb9827156d17e638dd045f1fc8b2c7738bca0c52936&quot;" />
+      <env name="PROJECT_FRONTEND_PATH" value="http://localhost:5174/" />
+      <env name="PROJECT_SECRET_KEY" value="9d84d7b6e5c541f203c51eb9827156d17e638dd045f1fc8b2c7738bca0c52936" />
       <env name="SPRING_DATASOURCE_PASSWORD" value="12345678" />
       <env name="SPRING_DATASOURCE_URL" value="jdbc:mysql://localhost:3306/db_project?createDatabaseIfNotExist=true&amp;serverTimezone=UTC" />
       <env name="SPRING_DATASOURCE_USER" value="root" />
