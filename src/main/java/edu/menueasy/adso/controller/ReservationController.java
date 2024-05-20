@@ -39,15 +39,23 @@ public class ReservationController {
         return ResponseEntity.ok(reservationService.updateReservation(reservation));
     }
 
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<String> deleteReservation(@PathVariable Long id) {
+        reservationService.deleteReservation(id);
+        return ResponseEntity.ok("Reservation deleted with success!");
+    }
+
     @PatchMapping("/check/{id}")
     @Transactional
-    public ResponseEntity<Reservation> checkReservation(@PathVariable("id") Long id, @RequestBody ReservationCheckDto reservation){
+    public ResponseEntity<Reservation> checkReservation(@PathVariable("id") Long id, @RequestBody ReservationCheckDto reservation) {
         return ResponseEntity.ok(reservationService.checkReservation(id, reservation));
     }
 
 
     @GetMapping("/count")
-    public ResponseEntity<Long> countReservation(){
+    public ResponseEntity<Long> countReservation() {
         return ResponseEntity.ok(reservationService.countReservation());
     }
 
@@ -63,11 +71,11 @@ public class ReservationController {
 
     @GetMapping
     public ResponseEntity<Page<Reservation>> getReservations(@PageableDefault Pageable pagination) {
-        return ResponseEntity.ok().body( reservationService.getReservations(pagination));
+        return ResponseEntity.ok().body(reservationService.getReservations(pagination));
     }
 
     @GetMapping("/unchecked-in-count")
-    public ResponseEntity<Long> getUncheckedInReservationCount(){
+    public ResponseEntity<Long> getUncheckedInReservationCount() {
         return ResponseEntity.ok(reservationService.getUncheckedInReservationCount());
     }
 
@@ -105,12 +113,6 @@ public class ReservationController {
         LocalDateTime startDate = LocalDateTime.parse(start);
         LocalDateTime endDate = LocalDateTime.parse(end);
         return ResponseEntity.ok(reservationService.getReservationsForGivenMonths(startDate, endDate));
-    }
-
-
-    @GetMapping("/conutcheck")
-    public Long contarReservasPorEstado(@RequestParam(value = "checkedIn") boolean checkedIn) {
-        return reservationService.contarReservasPorEstado(checkedIn);
     }
 
 

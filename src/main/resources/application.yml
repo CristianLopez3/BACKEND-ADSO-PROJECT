@@ -1,11 +1,13 @@
 spring:
-
   application:
     name: menu-easy
-
   datasource:
     url: ${SPRING_DATASOURCE_URL}
+<<<<<<< HEAD
     username: ${SPRING_DATASOURCE_USERNAME}
+=======
+    username: ${SPRING_DATASOURCE_USER}
+>>>>>>> docker
     password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     properties:
@@ -21,9 +23,13 @@ server:
       max-file-size: 10MB
       max-request-size: 10MB
 project:
-  image: images/
+  image: /app/images
+  secretKey: ${PROJECT_SECRET_KEY}
+  frontendPath: ${PROJECT_FRONTEND_PATH}
 logging:
   level:
     org:
       springframework:
         security: DEBUG
+
+

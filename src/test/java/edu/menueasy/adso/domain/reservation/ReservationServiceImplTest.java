@@ -59,6 +59,7 @@ class ReservationServiceImplTest {
 
 
   @Test
+<<<<<<< HEAD
   public void testUpdateReservation_ValidReservation() {
     // Arrange
     Long reservationId = 1L;
@@ -71,6 +72,18 @@ class ReservationServiceImplTest {
 
     // Act
     Reservation updatedReservation = reservationService.updateReservation(reservation);
+=======
+  public void updateReservation(){
+    Reservation reservation1 = new Reservation();
+    reservation1.setId(1L);
+    reservation1.setName("Example");
+
+    given(reservationRepository.findById(1L)).willReturn(Optional.of(reservation1));
+    given(reservationRepository.save(any(Reservation.class))).willReturn(reservation1);
+
+    Reservation updatedReservation = reservationService
+            .updateReservation(new Reservation().builder().id(1L).name("Example").build());
+>>>>>>> docker
 
     // Assert
     assertEquals(reservation, updatedReservation);

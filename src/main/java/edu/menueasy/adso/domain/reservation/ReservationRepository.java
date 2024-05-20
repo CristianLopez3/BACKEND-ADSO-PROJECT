@@ -15,8 +15,8 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
 
-    @NotNull Page<Reservation> findAll(Pageable pageable);
-
+    @NotNull
+    Page<Reservation> findAllByOrderByReservationDateDescCheckedInAsc(Pageable pageable);
     long count();
 
     List<Reservation> findByCheckedInIsTrue();

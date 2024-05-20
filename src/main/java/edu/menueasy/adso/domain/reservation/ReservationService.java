@@ -19,6 +19,8 @@ public interface ReservationService {
 
     Reservation updateReservation(Reservation reservation);
 
+    void deleteReservation(Long id);
+
     Reservation checkReservation(Long id, ReservationCheckDto reservationDto);
 
     Map<String, Integer> getMonthlyReservationCounts();
@@ -40,5 +42,4 @@ public interface ReservationService {
     Long getUncheckedInReservationCount();
 
 
-    Long contarReservasPorEstado(boolean checkedIn);
 }

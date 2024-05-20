@@ -2,6 +2,7 @@ package edu.menueasy.adso.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.menueasy.adso.domain.menu.Menu;
 import edu.menueasy.adso.domain.menu.MenuCreateDTO;
 import edu.menueasy.adso.domain.menu.MenuListDTO;
 import edu.menueasy.adso.domain.menu.image.DTOUpdateStateMenu;
@@ -31,8 +32,8 @@ public class MenuController {
 	}
 	
 	@GetMapping()
-	public ResponseEntity<Page<MenuListDTO>> getMenus(@PageableDefault Pageable pageable){
-		return ResponseEntity.ok(menuService.getAll(pageable));
+	public ResponseEntity<List<Menu>> getMenus(){
+		return ResponseEntity.ok(menuService.getAll());
 	}
 
 	@GetMapping("/category/{id}")

@@ -32,6 +32,7 @@ public class Reservation {
     @Column(name = "number_of_people")
     private Integer numberOfPeople;
     private String description;
+
     @Column(name = "checked_in")
     private Boolean checkedIn;
 

@@ -1,5 +1,7 @@
 package edu.menueasy.adso.domain.reservation;
 
+import edu.menueasy.adso.infra.exceptions.reservation.ReservationNotFoundException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,7 +24,6 @@ public class ReservationServiceImpl implements ReservationService {
         this.reservationValidator = reservationValidator;
     }
 
-    // Reservation creation and update methods
     @Override
     public Reservation createReservation(Reservation reservation) {
         reservationValidator.validate(reservation);
@@ -41,14 +42,25 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepository.save(reservation);
     }
 
+
+    @Override
+    public void deleteReservation(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Id must not be null!");
+        }
+        try {
+            reservationRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException ex) {
+            throw new ReservationNotFoundException("Reservation with id " + id + " not found!");
+        }
+    }
+
     @Override
     public Reservation checkReservation(Long id, ReservationCheckDto reservationDto) {
         Reservation reservation = findReservationById(id);
         reservation.setCheckedIn(reservationDto.checkedIn());
         return reservationRepository.save(reservation);
     }
-
-    // Reservation retrieval methods
 
 
     @Override
@@ -61,7 +73,6 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepository.findByCheckedInIsFalse();
     }
 
-    // Reservation statistics methods
     @Override
     public Long countReservation() {
         return reservationRepository.count();
@@ -114,21 +125,13 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public Page<Reservation> getReservations(Pageable pageable) {
-        return reservationRepository.findAll(pageable);
-    }
-
-    @Override
-    public Long contarReservasPorEstado(boolean checkedIn) {
-        return reservationRepository.countReservationsByCheckedIn(checkedIn);
+        return reservationRepository.findAllByOrderByReservationDateDescCheckedInAsc(pageable);
     }
 
 
-    // Helper methods
     private Reservation findReservationById(Long id) {
         return reservationRepository.findById(id).orElseThrow(() -> new RuntimeException("Can't find this reservation, try again"));
     }
-
-
 
     private Map<String, Integer> calculateMonthlyReservationCounts() {
         List<Object[]> monthlyCounts = reservationRepository.findMonthlyReservationCounts();
