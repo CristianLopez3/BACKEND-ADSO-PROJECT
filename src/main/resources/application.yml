@@ -20,11 +20,12 @@ server:
       max-request-size: 10MB
 project:
   image: /app/images
-  secretKey: ${SECRET_KEY}
-  frontendPath: ${FRONTEND_PATH}
+  secretKey: ${PROJECT_SECRET_KEY}
+  frontendPath: ${PROJECT_FRONTEND_PATH}
 logging:
   level:
     org:
       springframework:
         security: DEBUG
+
 

@@ -19,7 +19,7 @@ import java.util.function.Function;
 public class  JWTService {
 
     @Value("${project.secretKey}")
-    private  String SECRET_KEY;
+    private String SECRET_KEY;
 
     private Claims extractAllClaims(String token){
         return Jwts.parser()
