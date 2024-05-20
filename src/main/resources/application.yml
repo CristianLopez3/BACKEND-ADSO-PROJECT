@@ -3,11 +3,7 @@ spring:
     name: menu-easy
   datasource:
     url: ${SPRING_DATASOURCE_URL}
-<<<<<<< HEAD
     username: ${SPRING_DATASOURCE_USERNAME}
-=======
-    username: ${SPRING_DATASOURCE_USER}
->>>>>>> docker
     password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     properties:
