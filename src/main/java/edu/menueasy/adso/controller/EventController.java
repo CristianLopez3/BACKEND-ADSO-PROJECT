@@ -5,7 +5,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.menueasy.adso.domain.event.Event;
 import edu.menueasy.adso.domain.event.EventService;
-import jakarta.annotation.Nullable;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -31,14 +30,17 @@ public class EventController {
         return event != null ? ResponseEntity.ok(event) : ResponseEntity.notFound().build();
     }
 
+
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<Event> updateEvent(@PathVariable Integer id, @RequestPart("event") String eventStr) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         Event eventDetails = objectMapper.readValue(eventStr, Event.class);
-        Event updatedEvent = eventService.updateEvent(id, eventDetails);
+        Event updatedEvent = eventService.updateEventData(id, eventDetails);
         return ResponseEntity.ok(updatedEvent);
     }
+
+
 
     @PutMapping(
             value = "/{id}/picture",
@@ -46,8 +48,9 @@ public class EventController {
     )
     @Transactional
     public void updateEventImage(@PathVariable Integer id, @RequestParam("image") MultipartFile image) {
-        eventService.updateEvent(id, image);
+        eventService.updateEventImageUrl(id, image);
     }
+
 
     @GetMapping(
             value = "/{id}/picture",
@@ -55,7 +58,6 @@ public class EventController {
     )@Transactional
     public byte[] getEventImage(@PathVariable Integer eventId) {
         return eventService.getEventImage(eventId);
-
     }
 
 //    @PutMapping("/{id}/picture")

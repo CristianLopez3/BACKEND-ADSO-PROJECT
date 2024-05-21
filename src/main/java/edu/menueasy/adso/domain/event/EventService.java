@@ -6,9 +6,9 @@ public interface EventService {
 
     Event findEventById(Integer id);
 
-    void updateEvent(Integer id, MultipartFile image);
+    void updateEventImageUrl(Integer id, MultipartFile image);
 
-    Event updateEvent(Integer id, Event eventDetails);
+    Event updateEventData(Integer id, Event eventDetails);
 
     byte[] getEventImage(Integer eventId);
 

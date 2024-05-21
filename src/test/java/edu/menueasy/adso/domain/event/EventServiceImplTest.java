@@ -3,7 +3,6 @@ package edu.menueasy.adso.domain.event;
 import edu.menueasy.adso.domain.menu.image.ImageServiceImpl;
 import edu.menueasy.adso.s3.S3Buckets;
 import edu.menueasy.adso.s3.S3Service;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -59,7 +58,7 @@ class EventServiceImplTest {
         when(eventRepository.findById(any(Integer.class))).thenReturn(Optional.of(event));
         when(eventRepository.save(any(Event.class))).thenReturn(event);
 
-        Event result = underTest.updateEvent(1, event);
+        Event result = underTest.updateEventData(1, event);
 
         assertEquals(event, result);
         Mockito.verify(eventRepository).findById(any(Integer.class));
@@ -77,7 +76,9 @@ class EventServiceImplTest {
     @DisplayName("Test getEventImage")
     void getEventImage() {
         byte[] imageBytes = new byte[10];
-        when(eventRepository.findById(any(Integer.class))).thenReturn(Optional.of(new Event()));
+        Event event = new Event();
+        event.setUrl("MOCK_URL");
+        when(eventRepository.findById(any(Integer.class))).thenReturn(Optional.of(event));
         when(s3Service.getObject(eq(s3Buckets.getImages()), any(String.class))).thenReturn(imageBytes);
 
         byte[] result = underTest.getEventImage(1);
