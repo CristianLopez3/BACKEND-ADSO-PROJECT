@@ -5,10 +5,10 @@
       <env name="PROJECT_SECRET_KEY" value="9d84d7b6e5c541f203c51eb9827156d17e638dd045f1fc8b2c7738bca0c52936" />
       <env name="SPRING_DATASOURCE_PASSWORD" value="12345678" />
       <env name="SPRING_DATASOURCE_URL" value="jdbc:mysql://localhost:3306/db_project?createDatabaseIfNotExist=true&amp;serverTimezone=UTC" />
-      <env name="SPRING_DATASOURCE_USER" value="root" />
+      <env name="SPRING_DATASOURCE_USERNAME" value="root" />
     </envs>
     <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-    <module name="adso" />
+    <module name="app_menuEasy" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="edu.menueasy.adso.AdsoApplication" />
     <extension name="coverage">
       <pattern>

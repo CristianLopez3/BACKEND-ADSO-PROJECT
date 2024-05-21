@@ -10,6 +10,10 @@ spring:
       hibernate:
         format_sql: true
     show-sql: false
+
+aws:
+  region: us-east-1
+
 server:
   port: 8080
   error:
@@ -18,10 +22,14 @@ server:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+
+
 project:
   image: /app/images
   secretKey: ${PROJECT_SECRET_KEY}
   frontendPath: ${PROJECT_FRONTEND_PATH}
+
+
 logging:
   level:
     org:
