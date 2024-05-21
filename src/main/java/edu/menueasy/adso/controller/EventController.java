@@ -8,6 +8,7 @@ import edu.menueasy.adso.domain.event.EventService;
 import jakarta.annotation.Nullable;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,11 +40,30 @@ public class EventController {
         return ResponseEntity.ok(updatedEvent);
     }
 
-    @PutMapping("/{id}/picture")
+    @PutMapping(
+            value = "/{id}/picture",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    )
     @Transactional
-    public ResponseEntity<Event> updateEventImage(@PathVariable Integer id, @RequestParam("image") MultipartFile image) {
-        Event updatedEvent = eventService.updateEvent(id, image);
-        return ResponseEntity.ok(updatedEvent);
+    public void updateEventImage(@PathVariable Integer id, @RequestParam("image") MultipartFile image) {
+        eventService.updateEvent(id, image);
     }
+
+    @GetMapping(
+            value = "/{id}/picture",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    )@Transactional
+    public byte[] getEventImage(@PathVariable Integer eventId) {
+        return eventService.getEventImage(eventId);
+
+    }
+
+//    @PutMapping("/{id}/picture")
+//    @Transactional
+//    public ResponseEntity<Event> updateEventImage(@PathVariable Integer id, @RequestParam("image") MultipartFile image) {
+//        Event updatedEvent = eventService.updateEvent(id, image);
+//        return ResponseEntity.ok(updatedEvent);
+//    }
+
 
 }

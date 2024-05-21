@@ -1,5 +1,6 @@
 package edu.menueasy.adso;
 
+import edu.menueasy.adso.s3.S3Buckets;
 import edu.menueasy.adso.s3.S3Service;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,11 +17,11 @@ public class AdsoApplication {
     }
 
     @Bean
-    CommandLineRunner runner(S3Service service) {
+    CommandLineRunner runner(S3Service service, S3Buckets s3Buckets) {
         return args -> {
-           service.putObject("menueasy-pictures", "testfoo", "Cristian".getBytes());
+           service.putObject(s3Buckets.getImages(), "testfoo", "Cristian".getBytes());
 
-           byte[] res = service.getObject("menueasy-pictures", "testfoo");
+           byte[] res = service.getObject(s3Buckets.getImages(), "testfoo");
               System.out.println(new String(res, StandardCharsets.UTF_8));
         };
     }
