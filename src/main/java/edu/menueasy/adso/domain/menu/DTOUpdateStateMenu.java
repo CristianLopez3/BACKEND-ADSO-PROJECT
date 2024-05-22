@@ -1,4 +1,4 @@
-package edu.menueasy.adso.domain.menu.image;
+package edu.menueasy.adso.domain.menu;
 
 public record DTOUpdateStateMenu(Boolean state) {
 }

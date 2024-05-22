@@ -1,6 +1,6 @@
 package edu.menueasy.adso.domain.event;
 
-import edu.menueasy.adso.domain.menu.image.ImageServiceImpl;
+
 import edu.menueasy.adso.s3.S3Buckets;
 import edu.menueasy.adso.s3.S3Service;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,8 +27,6 @@ class EventServiceImplTest {
     @Mock
     private  EventRepository eventRepository;
     @Mock
-    private  ImageServiceImpl filesService;
-    @Mock
     private  S3Service s3Service;
     @Mock
     private  S3Buckets s3Buckets;
@@ -36,7 +34,7 @@ class EventServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        underTest = new EventServiceImpl(eventRepository, filesService, s3Service, s3Buckets);
+        underTest = new EventServiceImpl(eventRepository, s3Service, s3Buckets);
     }
 
     @Test

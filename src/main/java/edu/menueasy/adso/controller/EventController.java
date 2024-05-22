@@ -52,20 +52,12 @@ public class EventController {
     }
 
 
-    @GetMapping(
-            value = "/{id}/picture",
-            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
-    )@Transactional
-    public byte[] getEventImage(@PathVariable Integer eventId) {
-        return eventService.getEventImage(eventId);
+    @GetMapping("/{id}/picture")
+    @Transactional
+    public byte[] getEventImage(@PathVariable Integer id) {
+        return eventService.getEventImage(id);
     }
 
-//    @PutMapping("/{id}/picture")
-//    @Transactional
-//    public ResponseEntity<Event> updateEventImage(@PathVariable Integer id, @RequestParam("image") MultipartFile image) {
-//        Event updatedEvent = eventService.updateEvent(id, image);
-//        return ResponseEntity.ok(updatedEvent);
-//    }
 
 
 }

@@ -5,8 +5,6 @@ import edu.menueasy.adso.s3.S3Buckets;
 import edu.menueasy.adso.s3.S3Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import edu.menueasy.adso.domain.menu.image.ImageServiceImpl;
-import edu.menueasy.adso.infra.exceptions.menu.ImageUploadException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,7 +16,6 @@ import java.util.UUID;
 public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
-    private final ImageServiceImpl filesService;
     private final S3Service s3Service;
     private final S3Buckets s3Buckets;
 
@@ -27,10 +24,9 @@ public class EventServiceImpl implements EventService {
 
 
     @Autowired
-    public EventServiceImpl(EventRepository eventRepository, ImageServiceImpl filesServicer,
-                            S3Service s3Service, S3Buckets s3Buckets) {
+    public EventServiceImpl(EventRepository eventRepository, S3Service s3Service,
+                            S3Buckets s3Buckets) {
         this.eventRepository = eventRepository;
-        this.filesService = filesServicer;
         this.s3Service = s3Service;
         this.s3Buckets = s3Buckets;
     }
@@ -95,26 +91,7 @@ public class EventServiceImpl implements EventService {
     }
 
 
-    private String uploadImage(MultipartFile image) {
-        try {
-            return filesService.uploadImage(PATH, image);
-        } catch (IOException e) {
-            throw new ImageUploadException(e.getMessage(), e);
-        }
-    }
 
-
-//    @Override
-//    public void updateEvent(Integer id, MultipartFile image) {
-//        Event existingEvent = eventRepository.findById(id).orElseThrow(
-//                () -> new IllegalArgumentException("Event with id " + id + " not found")
-//        );
-//        if (image != null) {
-//            String imageUrl = uploadImage(image);
-//            existingEvent.setUrl(imageUrl);
-//        }
-//        eventRepository.save(existingEvent);
-//    }
 
 
 }
