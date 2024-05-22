@@ -1,2 +1,0 @@
-INSERT INTO tb_event (id, title, description, discount, url) VALUES
-("DAY OF MOTHERS", "ON THIS SO ESPECIAL DAY FOR YOUR MOTHER, GIVE HER A ESPECIAL LUNCH HOW SHE! DISCOUNT UP T0 20 PERCENT", 20, "ulrexample");

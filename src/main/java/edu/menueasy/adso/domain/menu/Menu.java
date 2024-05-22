@@ -32,7 +32,7 @@ public class Menu {
   @Column(name = "state")
   private Boolean state;
 
-  @Column(name = "image_name")
+  @Column(name = "image_url")
   private String imageName;
 
   @ManyToOne(fetch = FetchType.EAGER)

@@ -20,5 +20,10 @@ public interface MenuService {
 	List<MenuListDTO> findByCategory(Integer idCategory);
 
 	Long countMenus();
+
+	Menu updateMenuImageUrl(Integer id, MultipartFile image);
+
+	byte[] getMenuImage(Integer eventId);
+
 	
 }

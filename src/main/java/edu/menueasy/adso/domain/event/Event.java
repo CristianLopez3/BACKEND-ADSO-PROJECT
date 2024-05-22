@@ -22,13 +22,13 @@ public class Event {
     @Column ( name = "title")
     private String title;
 
-    @Column( name = "description", length = 100)
+    @Column( name = "description", length = 1000)
     private String description;
 
     @Column( name = "discount")
     private Integer discount;
 
-    @Column (name = "url")
+    @Column (name = "image_url")
     private String url;
 
 
