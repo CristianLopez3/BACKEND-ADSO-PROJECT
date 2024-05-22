@@ -41,7 +41,6 @@ public class EventController {
     }
 
 
-
     @PutMapping(
             value = "/{id}/picture",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE
@@ -52,12 +51,14 @@ public class EventController {
     }
 
 
-    @GetMapping("/{id}/picture")
+    @GetMapping(
+            value = "/{id}/picture",
+            produces = MediaType.IMAGE_JPEG_VALUE
+    )
     @Transactional
     public byte[] getEventImage(@PathVariable Integer id) {
         return eventService.getEventImage(id);
     }
-
 
 
 }

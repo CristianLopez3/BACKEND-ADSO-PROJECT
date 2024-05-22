@@ -22,90 +22,89 @@ import java.util.List;
 public class MenuController {
 
 
-	private final MenuServiceImpl menuService;
+    private final MenuServiceImpl menuService;
 
-	@Autowired
-	public MenuController(MenuServiceImpl menuService) {
-		this.menuService = menuService;
-	}
-
-
-	@GetMapping
-	public ResponseEntity<List<Menu>> getMenus(){
-		return ResponseEntity.ok(menuService.getAll());
-	}
+    @Autowired
+    public MenuController(MenuServiceImpl menuService) {
+        this.menuService = menuService;
+    }
 
 
-	@GetMapping("/category/{id}")
-	public ResponseEntity<List<MenuListDTO>> getMenusByCategory(@PathVariable("id") Integer id){
-		return ResponseEntity.ok(menuService.findByCategory(id));
-	}
+    @GetMapping
+    public ResponseEntity<List<Menu>> getMenus() {
+        return ResponseEntity.ok(menuService.getAll());
+    }
 
 
-	@PostMapping
-	@Transactional
-	public ResponseEntity<MenuListDTO> createMenu(
-					@RequestParam("image") MultipartFile image,
-					@RequestPart("menu") String menuStr
-	) throws JsonProcessingException {
-
-		ObjectMapper objectMapper = new ObjectMapper();
-		MenuCreateDTO menu = objectMapper.readValue(menuStr, MenuCreateDTO.class);
-		return ResponseEntity.ok(menuService.create(menu, image));
-	}
+    @GetMapping("/category/{id}")
+    public ResponseEntity<List<MenuListDTO>> getMenusByCategory(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(menuService.findByCategory(id));
+    }
 
 
+    @PostMapping
+    @Transactional
+    public ResponseEntity<MenuListDTO> createMenu(
+            @RequestParam("image") MultipartFile image,
+            @RequestPart("menu") String menuStr
+    ) throws JsonProcessingException {
 
-	@PutMapping("/{id}")
-	public ResponseEntity<MenuListDTO> updateMenu(@RequestBody MenuCreateDTO menu, @PathVariable Integer id){
-		return ResponseEntity.ok(menuService.updateMenu(menu, id));
-	}
-
-
-
-	@GetMapping("/{id}")
-	public ResponseEntity<MenuListDTO> getMenu(@PathVariable Integer id){
-		return ResponseEntity.ok(menuService.getMenu(id));
-	}
-
+        ObjectMapper objectMapper = new ObjectMapper();
+        MenuCreateDTO menu = objectMapper.readValue(menuStr, MenuCreateDTO.class);
+        return ResponseEntity.ok(menuService.create(menu, image));
+    }
 
 
-	@PutMapping(
-			value = "{id}/image",
-			consumes = MediaType.MULTIPART_FORM_DATA_VALUE
-	)
-	@Transactional
-	public ResponseEntity<Menu> updateMenuImage(@PathVariable Integer id, @RequestParam("image") MultipartFile image){
-		return ResponseEntity.ok(menuService.updateMenuImageUrl(id, image));
-	}
+    @PutMapping("/{id}")
+    public ResponseEntity<MenuListDTO> updateMenu(@RequestBody MenuCreateDTO menu, @PathVariable Integer id) {
+        return ResponseEntity.ok(menuService.updateMenu(menu, id));
+    }
 
 
-	@GetMapping("/{id}/image")
-	public ResponseEntity<byte[]> getMenuImage(@PathVariable Integer id){
-		return ResponseEntity.ok(menuService.getMenuImage(id));
-	}
+    @GetMapping("/{id}")
+    public ResponseEntity<MenuListDTO> getMenu(@PathVariable Integer id) {
+        return ResponseEntity.ok(menuService.getMenu(id));
+    }
 
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deleteMenu(@PathVariable Integer id){
-		menuService.deleteMenu(id);
-		return ResponseEntity.ok("Menu deleted with success!");
-	}
+    @PutMapping(
+            value = "{id}/image",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    )
+    @Transactional
+    public ResponseEntity<Menu> updateMenuImage(@PathVariable Integer id, @RequestParam("image") MultipartFile image) {
+        return ResponseEntity.ok(menuService.updateMenuImageUrl(id, image));
+    }
 
 
-	@PatchMapping("/state/{id}")
-	public ResponseEntity<MenuListDTO> changeState(@PathVariable("id") Integer id, @RequestBody DTOUpdateStateMenu menuState){
-		return ResponseEntity.ok(menuService.changeState(id, menuState));
-	}
+    @GetMapping(
+            value = "/{id}/image",
+            produces = MediaType.IMAGE_JPEG_VALUE
+    )
+    public ResponseEntity<byte[]> getMenuImage(@PathVariable Integer id) {
+        return ResponseEntity.ok(menuService.getMenuImage(id));
+    }
 
 
-	@GetMapping("/count")
-	public ResponseEntity<Long> countMenus(){
-		long countMenus = menuService.countMenus();
-		return ResponseEntity.ok(menuService.countMenus());
-	}
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteMenu(@PathVariable Integer id) {
+        menuService.deleteMenu(id);
+        return ResponseEntity.ok("Menu deleted with success!");
+    }
 
-	// TODO: Implement method to update image of a menu
+
+    @PatchMapping("/state/{id}")
+    public ResponseEntity<MenuListDTO> changeState(@PathVariable("id") Integer id, @RequestBody DTOUpdateStateMenu menuState) {
+        return ResponseEntity.ok(menuService.changeState(id, menuState));
+    }
+
+
+    @GetMapping("/count")
+    public ResponseEntity<Long> countMenus() {
+        return ResponseEntity.ok(menuService.countMenus());
+    }
+
+    // TODO: Implement method to update image of a menu
 
 
 }
