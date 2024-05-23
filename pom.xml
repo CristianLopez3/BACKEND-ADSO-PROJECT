@@ -11,11 +11,12 @@
     <groupId>edu.menueasy</groupId>
     <artifactId>app_menuEasy</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>app_menuEasy</name>
-    <description>Demo Project adso</description>
+    <name>menueasy</name>
+    <description>Adso Project - Menu Easy</description>
     <properties>
         <java.version>17</java.version>
         <jwt.version>0.12.5</jwt.version>
+        <aws.s3.version>2.20.26</aws.s3.version>
     </properties>
     <dependencies>
 
@@ -126,6 +127,12 @@
             <artifactId>flyway-mysql</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>s3</artifactId>
+            <version>${aws.s3.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -143,6 +150,8 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>menueasy</finalName>
     </build>
 
 </project>
+
