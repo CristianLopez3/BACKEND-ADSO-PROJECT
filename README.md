@@ -1,8 +1,6 @@
-[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/55wHZwfphonnKbAksBFj24/R1HJYQNmAP7Rf4Cf68perg/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/55wHZwfphonnKbAksBFj24/R1HJYQNmAP7Rf4Cf68perg/tree/main)
+# Actions
 
-# SPRING BOOT :pencil:
-
-this going to be a repository for learning uses...
+In this branch the actions works
 
 
 ```sh
@@ -11,4 +9,3 @@ this going to be a repository for learning uses...
 ```
 >[!IMPORTANT]
 >Create a basic spring boot project, with spring web, jpa and mysql driver
-aaaa
