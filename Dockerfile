@@ -13,3 +13,4 @@ ENV PROJECT_FRONTEND_PATH=http://localhost:5174
 EXPOSE 8080
 
 CMD ["java", "-jar", "menueasy.jar"]
+# I'm tired
